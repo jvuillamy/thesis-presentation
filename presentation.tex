@@ -1,0 +1,65 @@
+\documentclass{beamer}
+\usetheme[sectionpage=none, progressbar=frametitle,background=light]{metropolis}
+%\usetheme{focus}
+%\useoutertheme{metropolis}
+%\useinnertheme{metropolis}
+%\usefonttheme{metropolis}
+%\usecolortheme{seahorse}
+
+\usepackage{graphics}
+\usepackage{appendixnumberbeamer}
+
+\usepackage{algorithm2e}
+\usepackage{amsmath}
+\usepackage{subcaption}
+
+\newcommand{\GraphV}{\mathcal{V}}
+\newcommand{\GraphE}{\mathcal{E}}
+
+\setbeamerfont{footnote}{size=\fontsize{5pt}{5pt}\selectfont}
+\setbeamerfont{footnote mark}{size=\fontsize{5pt}{5pt}\selectfont}
+%\renewcommand{\thefootnote}{\arabic{footnote}}
+
+%\newcommand{\alertline}{%
+%	\usebeamercolor[fg]{normal text}%
+%	\only{\usebeamercolor[fg]{alerted text}}}
+
+\title{Planimetric simplification and lexicographic optimal chains for 3D urban scene reconstruction}
+\author[Julien Vuillamy]{Julien Vuillamy}
+\institute[]{Dassault Systèmes Provence - INRIA Sophia Antipolis TITANE}
+\date{September 17, 2021}
+\titlegraphic{
+	\vspace{7cm}\flushright\centering
+	\includegraphics[width=0.25\linewidth]{front/logo-ds}\hspace{1cm}
+	\includegraphics[width=0.25\linewidth]{front/logo-anrt}\hspace{1cm}
+	\includegraphics[width=0.25\linewidth]{front/logo-inria}
+}
+
+\graphicspath{{images}}
+
+\setcounter{tocdepth}{1}
+	
+\begin{document}
+	\begin{frame}
+		\titlepage
+	\end{frame}
+		
+	\section*{Outline}
+	\begin{frame}{Outline}
+ 	    \tableofcontents
+	\end{frame}
+	
+	\include{introduction}
+	\include{2D-simplification}
+	\include{lexicographic}
+	\include{conclusion}
+		
+	\appendix
+	
+	\include{appendices}
+
+
+\bibliographystyle{alphaurl}
+\bibliography{bibliography}
+
+\end{document}

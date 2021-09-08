@@ -1,0 +1,32 @@
+\section{Dense representations from lexicographic optimal chains}
+
+\begin{frame}
+	\begin{minipage}[t][0.5\textheight][t]{0.8\linewidth}
+		\scriptsize
+		\begin{algorithm}[H]
+			%			\caption{Lexicographic min-cut}\label{algorithm:Lex-OHCP}
+			\SetKwInOut{Input}{Inputs}
+			\SetKwInOut{Output}{Output}
+			\SetKw{Continue}{continue}
+			\SetKw{Or}{or}
+			\Input{$G = (\GraphV, \GraphE)$ and $\alpha_1, \alpha_2 \in \GraphV$, with $\GraphE=\{e_i,i=1,\dots,n\}$ in decreasing order}
+			\Output{$\Gamma_{\operatorname{LMC}}$}
+			\alert<+>{$\Gamma_{\operatorname{LMC}} \leftarrow \varnothing$} \\
+			\alert<+>{\For{$v \in \GraphV$} {
+					\textbf{MakeSet}(v)
+			}}
+			
+			\For{$e \in \GraphE$ in decreasing order}{
+				\alert<+>{$e = (v_1, v_2) \in \GraphV\times \GraphV$} \\
+				\alert<+>{$r_1 \leftarrow \textbf{FindSet}(v_1)$, $r_2 \leftarrow \textbf{FindSet}(v_2)$ \\
+					$c_1 \leftarrow \textbf{FindSet}(\alpha_1)$, $c_2 \leftarrow \textbf{FindSet}(\alpha_2)$} \\
+				\eIf{\alert<+>{$\{ r_1, r_2\} = \{ c_1, c_2 \}$}}{
+					$\Gamma_{\operatorname{LMC}} \leftarrow \Gamma_{\operatorname{LMC}} \cup e$
+				}
+				{
+					$\textbf{UnionSet}(r_1, r_2)$
+				}
+			}
+		\end{algorithm}
+	\end{minipage}		
+\end{frame}
