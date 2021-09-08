@@ -1,28 +1,89 @@
 \documentclass{beamer}
 \usetheme[sectionpage=none, progressbar=frametitle,background=light]{metropolis}
-%\usetheme{focus}
-%\useoutertheme{metropolis}
-%\useinnertheme{metropolis}
-%\usefonttheme{metropolis}
-%\usecolortheme{seahorse}
+
+\usepackage[english]{babel}
 
 \usepackage{graphics}
 \usepackage{appendixnumberbeamer}
 
 \usepackage{algorithm2e}
-\usepackage{amsmath}
+\usepackage{amssymb,amsmath,amsthm, bm}
 \usepackage{subcaption}
+\usepackage{tikz, enumitem}
+\usepackage{tabularx}
+
+\usetikzlibrary{positioning}
+
+%General declarations
+\DeclareMathOperator{\Ima}{Im}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\low}{low}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Sphere}{\mathbb{S}}
+\newcommand{\BigO}{\mathcal{O}}
+
+\newcommand{\defunder}[1]{\underset{\text{def.}}{#1} \:}
+\newcommand{\vspan}{\operatorname{span}}
+
+\newcommand{\LexicographicOrderChain}{\sqsubseteq_{lex}}
+\newcommand{\LexicographicStrictOrderChain}{\sqsubset_{lex}}
+\newcommand{\LexicographicOrderEdgeSets}{\sqsubseteq_{\ee}}
 
 \newcommand{\GraphV}{\mathcal{V}}
 \newcommand{\GraphE}{\mathcal{E}}
 
+\newcommand{\VKer}{V^{\Ker}}
+\newcommand{\nKer}{n^{\Ker}}
+
+% Lexicographic order
+\newcommand{\seb}{\mathbf{SEB}}
+\newcommand{\circumcenter}[1]{\operatorname{C_C}\left({#1}\right)}
+
+\newcommand{\rseb}{\operatorname{R_B}}
+\newcommand{\circrad}{\operatorname{R_C}}
+\newcommand{\TOrderSimplex}{\leq_\infty}
+\newcommand{\TOrderSimplexStrict}{<_\infty}
+\newcommand{\TReverseOrderSimplexStrict}{>_\infty}
+\newcommand{\lift}{\operatorname{lift}}
+\newcommand{\Krad}[1]{\mu_{#1}}
+\newcommand{\WDist}{\operatorname{D}}
+
+\newcommand{\SOrderChain}{\sqsubseteq_\infty}
+\newcommand{\SOrderChainStrict}{\sqsubset_\infty}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\CH}{\mathcal{CH}}
+
+\newcommand{\Cchains}{\mathbf{C}}
+\newcommand{\Zchains}{\mathbf{Z}}
+\newcommand{\Bchains}{\mathbf{B}}
+\newcommand{\Homol}{\mathcal{H}}
+\newcommand{\HomolP}{\mathcal{H}^{pers.}}
+
+\newcommand{\CritBasis}{\mathbf{b}}
+\newcommand{\Crit}{\operatorname{crit}}
+\newcommand{\ZchainMin}{\Zchains^{\min}}
+
+\newcommand{\ee}{\mathbf{e}}
+\newcommand{\Delaunay}{\mathcal{D}el}
+\newcommand{\Link}[1]{\operatorname{lk}_{#1}}
+\newcommand{\LLink}[1]{\operatorname{llk}_{#1}}
+\newcommand{\LinkDel}{\Link{\Delaunay(\mathbf{P})}}
+\newcommand{\LLinkDel}{\LLink{\Delaunay(\mathbf{P})}}
+
+\newcommand{\Ack}{\bm{\alpha}}
+
+\newcommand{\Vspan}{\operatorname{span}}
+\newcommand{\Mlex}{M_{lex}}
+
 \setbeamerfont{footnote}{size=\fontsize{5pt}{5pt}\selectfont}
 \setbeamerfont{footnote mark}{size=\fontsize{5pt}{5pt}\selectfont}
-%\renewcommand{\thefootnote}{\arabic{footnote}}
-
-%\newcommand{\alertline}{%
-%	\usebeamercolor[fg]{normal text}%
-%	\only{\usebeamercolor[fg]{alerted text}}}
 
 \title{Planimetric simplification and lexicographic optimal chains for 3D urban scene reconstruction}
 \author[Julien Vuillamy]{Julien Vuillamy}
@@ -44,9 +105,9 @@
 		\titlepage
 	\end{frame}
 		
-	\section*{Outline}
+%	\section*{Outline}
 	\begin{frame}{Outline}
- 	    \tableofcontents
+% 	    \tableofcontents
 	\end{frame}
 	
 	\include{introduction}
