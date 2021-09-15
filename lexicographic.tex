@@ -64,8 +64,22 @@
 \end{frame}
 
 % Total order on k-simplices
-\begin{frame}[c]{A total order based on the Delaunay triangulation}
+\begin{frame}[c]{A total order based on the Delaunay triangulation (I)}
 	\scriptsize
+	\begin{block}{\scriptsize Total order on 2-simplices}
+		For $\sigma_1, \sigma_2 \in K^{(2)}$,
+		\[
+		\sigma_1 \leq \sigma_2 \defunder{\iff}
+		\begin{cases}
+			\rseb(\sigma_1) < \rseb(\sigma_2) &\\
+			\:  \operatorname{or} &\\
+			\rseb(\sigma_1) = \rseb(\sigma_2) & \operatorname{and} \circrad(\sigma_1) \geq \circrad(\sigma_2)
+		\end{cases}
+		\]
+	\end{block}
+	
+	\vspace{0.5cm}
+		
 	\begin{center}
 		\begin{minipage}{0.5\linewidth}
 			\centering
@@ -78,20 +92,32 @@
 			\color{pathorange} $\circrad(\sigma_1) \neq \circrad(\sigma_2)$
 		\end{minipage}%
 	\end{center}
-	
-	\vspace{0.5cm}
-	
-	\begin{block}{Total order on 2-simplices}
-		For $\sigma_1, \sigma_2 \in K^{(2)}$,
-		\[
-		\sigma_1 \leq \sigma_2 \defunder{\iff}
-		\begin{cases}
-			\rseb(\sigma_1) < \rseb(\sigma_2) &\\
-			\:  \operatorname{or} &\\
-			\rseb(\sigma_1) = \rseb(\sigma_2) & \operatorname{and} \circrad(\sigma_1) \geq \circrad(\sigma_2)
-		\end{cases}
-		\]
-	\end{block}
+\end{frame}
+
+\begin{frame}{A total order based on the Delaunay triangulation (II)}
+\small
+\begin{minipage}{0.6\linewidth}
+\begin{block}{\small Proposition}
+The support of
+\[
+	\min_{\LexicographicOrderChain} \{ \Gamma \in \Cchains_2(K), \partial \Gamma = \beta_{\mathbf{P}} \}
+\]
+corresponds to the $2$-simplices of the Delaunay triangulation of $P$.
+\end{block}
+\end{minipage}%
+\begin{minipage}{0.4\linewidth}
+	\begin{tikzpicture}
+		\node (delaunay) { \includegraphics[width=0.9\linewidth]{delaunay_bp} };
+		\node[above right=-0.5cm and -0.5cm of delaunay]{$\beta_{\mathbf{P}}$};
+		\node at (0.2cm, 0) {$\mathbf{P}$};
+	\end{tikzpicture}
+\end{minipage}
+
+\vspace{0.5cm}
+
+\textbf{Generalization} of a total order for simplices in any dimension.
+
+\textbf{Characterization of regular triangulations} as lexicographic optimal chains.
 \end{frame}
 
 % Crash course
@@ -182,10 +208,10 @@
 
 % Lexicographic order
 \begin{frame}{Lexicographic preorder on chains}
-	$K$: simplicial complex.
-	$\Cchains(K; \F)$ Vector space of chains.
+	$K$: simplicial complex.\\
+	$\Cchains_k(K; \F)$ Vector space of $k$-chains.
 	
-	Total order on $k$-simplices, denoted $<$.
+	\textbf{Total order} on $k$-simplices, denoted $<$.
 		
 	\textbf{Lexicographic preorder} Given $\Gamma_1, \Gamma_2 \in \Cchains_k(K; \F)$,
 		\[
@@ -197,35 +223,37 @@
 		\end{cases}
 		\]
 		where $\triangle$ denotes the set symmetric difference.
-		
-	\[
-		\big( \Gamma_1 \LexicographicOrderChain \Gamma_2 \quad \textrm{and} \quad  	\Gamma_2 
-		\LexicographicOrderChain  \Gamma_1 \big) \iff |\Gamma_1| = |\Gamma_2| 
-	\]
-	
-	\begin{alertblock}{$\F = \Z_2$}
-		$\LexicographicOrderChain$ is a total order.
-	\end{alertblock}
+
+%	\[
+%		\big( \Gamma_1 \LexicographicOrderChain \Gamma_2 \quad \textrm{and} \quad  	\Gamma_2 
+%		\LexicographicOrderChain  \Gamma_1 \big) \iff |\Gamma_1| = |\Gamma_2| 
+%	\]
+%	
+%	\begin{alertblock}{$\F = \Z_2$}
+%		$\LexicographicOrderChain$ is a total order.
+%	\end{alertblock}
 \end{frame}
 
 % Formulation
 \begin{frame}[t]{Homological formulation}
 \small
-\textbf{Optimal Homologous Chain Problem (OHCP)} \\
 
-Find the optimal chain $\Gamma_{\min}$ homologous to a given chain $\Gamma_0$:
+\begin{minipage}{0.5\linewidth}
+\textbf{Optimal homologous chain} to a given chain $\Gamma_0$
 \begin{equation*}
-	\Gamma_{\min} = \min \Big\{ \Gamma \in \Cchains_k(K) \mid \exists A \in \Cchains_{k+1}(K), \Gamma - \Gamma_0 = \partial_{k+1} A \Big\}
+	\Gamma_{\min} = \min \Big\{ \Gamma_0 + \partial_{k+1} A, A \in \Cchains_{d+1}(K) \Big\}
 \end{equation*}
 
-\vspace{0.5cm}
-
-\textbf{Imposed Boundary Problem} \\
-
-Given a $(k-1)$-boundary $\beta$, find the optimal chain $\Gamma_{\min}$ bounding $\beta$:
+\textbf{Optimal chain under imposed boundary} $\beta$
 \begin{equation*}
 	\Gamma_{\min} = \min \Big\{ \Gamma \in \Cchains_k(K) \mid \partial_k \Gamma = \beta \Big\}
 \end{equation*}
+
+\end{minipage}%
+\begin{minipage}{0.5\linewidth}
+	
+	
+\end{minipage}
 
 \pause
 \vspace{0.5cm}
@@ -621,46 +649,47 @@ Dual graph $G=(\GraphV, \GraphE)$, two vertices $\widetilde{\tau}_1,\widetilde{\
 	\end{table}
 \end{frame}
 
-\begin{frame}{Linearity \& homology generators}
+\begin{frame}{Critical basis}
 	\small
 	
+	\textbf{Lexicographic minimal representative}
 	\[
 		\Mlex : \Gamma \in \Cchains_k(K, B) \mapsto \min_{\LexicographicOrderChain} \: \Gamma + \Bchains_{k}(K, B)
 	\]
 	
-	$\Mlex$ is \textbf{linear}
+	$\Mlex$ is \textbf{linear}.
 	
-	\[
-	\ZchainMin_k(K,B) \defunder{=} \Mlex(\Zchains_k(K, B))
-	\]
+	\textbf{Vector space of lexicographic optimal chains}
+	\begin{eqnarray*}
+		\ZchainMin_k(K,B) &\defunder{=}& \Mlex(\Zchains_k(K, B)) \\
+						  &\simeq& \Homol_k(K, B)
+	\end{eqnarray*}
 	
-	\[
-		\begin{tikzcd}[ampersand replacement=\&]
-			\& \Zchains_k(K, B) \ar{dr} \arrow{r}{\Mlex} \& \ZchainMin_k (K,B) \ar{d}{\mathbf{iso.}} \arrow{r}{\subset } \& \Zchains_k(K, B) \\
-			\&\& \Homol_k(K,B) 
-		\end{tikzcd}
-	\]
-\end{frame}
-
-\begin{frame}{Critical basis}
-	\small	
-	For $\Gamma \in \ZchainMin_k(K,B)$,
-	\[
-	\Crit(\Gamma) \defunder{=} \max | \Gamma |
-	\]
-	
-	\pause
-	\textbf{Critical basis}
+	\textbf{Critical basis} of $\ZchainMin_k(K,B)$
 	\begin{equation*}
 		\CritBasis_{i+1} = \min_{\LexicographicOrderChain} \left\{  \Gamma \in  \ZchainMin_k(K) \: \mid \:   \Gamma \notin \Vspan(  \CritBasis_1, \ldots , \CritBasis_i ) \text{ and } \Gamma\big(\Crit(\Gamma)\big)= 1 \right\}
 	\end{equation*}
-		
-	\pause
-	\begin{center}
-		$\CritBasis_j ( \Crit( \CritBasis_i ) ) =  \delta_{ij}$ where $\delta_{ij}$ is the Kronecker delta. 
-	\end{center}
-
 \end{frame}
+
+%\begin{frame}{Critical basis}
+%	\small	
+%	For $\Gamma \in \ZchainMin_k(K,B)$,
+%	\[
+%	\Crit(\Gamma) \defunder{=} \max | \Gamma |
+%	\]
+%	
+%	\pause
+%	\textbf{Critical basis}
+%	\begin{equation*}
+%		\CritBasis_{i+1} = \min_{\LexicographicOrderChain} \left\{  \Gamma \in  \ZchainMin_k(K) \: \mid \:   \Gamma \notin \Vspan(  \CritBasis_1, \ldots , \CritBasis_i ) \text{ and } \Gamma\big(\Crit(\Gamma)\big)= 1 \right\}
+%	\end{equation*}
+%		
+%	\pause
+%	\begin{center}
+%		$\CritBasis_j ( \Crit( \CritBasis_i ) ) =  \delta_{ij}$ where $\delta_{ij}$ is the Kronecker delta. 
+%	\end{center}
+%
+%\end{frame}
 
 \begin{frame}{Applications}
 	\scriptsize

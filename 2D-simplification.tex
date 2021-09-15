@@ -2,119 +2,171 @@
 
 \section{Parsimonious representations from 2D partitions}
 
-%\begin{frame}{Approaches}
-%	
-%\begin{frame}
+\begin{frame}{General idea}
+	\scriptsize
+	\begin{center}
+		\begin{minipage}{0.2\linewidth}
+			\includegraphics[width=\linewidth]{pipeline/pointcloud_crop}
+		\end{minipage}%
+		\hspace{0.5cm}
+		\begin{minipage}{0.7\linewidth}
+			\textbf{Inputs}: Point clouds of built structures
+		\end{minipage}
+	\end{center}
+
+	\begin{center}
+		\begin{minipage}{0.6\linewidth}
+			\textbf{Output:} LOD2 representation\\
+			Support of piecewise-linear 2D function
+		\end{minipage}%
+		\begin{minipage}{0.2\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{lod2}
+		\end{minipage}
+	\end{center}
 	
+	\begin{center}
+		\begin{minipage}{0.2\linewidth}
+			\includegraphics[height=0.2\textheight]{pipeline/original}
+		\end{minipage}%
+		\hspace{0.2cm}
+		\begin{minipage}{0.7\linewidth}
+			\textbf{Reduced to a 2D partitioning problem}
+			
+			\cite{zhou_5DDualContouring_2010, bauchet_CityReconstructionAirborne_2019}
+		\end{minipage}%
+	\end{center}
+
+\end{frame}
+
+%\begin{frame}{Reconstruction pipeline}
+%	\begin{minipage}[b]{0.2\linewidth}
+%	\includegraphics[width=\linewidth]{pipeline/pointcloud_crop}
+%	\end{minipage}%
+%	\begin{minipage}[b]{0.2\linewidth}
+%		\includegraphics[width=\linewidth]{pipeline/segments_crop}
+%	\end{minipage}%
+%	\begin{minipage}[b]{0.2\linewidth}
+%		\includegraphics[width=\linewidth]{pipeline/original}
+%	\end{minipage}%
+%	\begin{minipage}[b]{0.2\linewidth}
+%		\includegraphics[width=\linewidth]{pipeline/simplified}
+%	\end{minipage}%
+%	\begin{minipage}[b]{0.2\linewidth}
+%		\includegraphics[width=\linewidth]{pipeline/mesh_crop}
+%	\end{minipage}
+%
+%	\begin{itemize}
+%		\item Input: Point clouds, Photogrammetry or Structure-from-Motion (SfM)
+%		\item Segment detection
+%		\item Kinetic partition
+%		\item Simplification
+%		\item Lifted model (LOD2 representation for GIS)
+%	\end{itemize}
+%\end{frame}
+
 \begin{frame}{Reconstruction pipeline}
-	\begin{minipage}[b]{0.2\linewidth}
-	\includegraphics[width=\linewidth]{pipeline/pointcloud_crop}
-	\end{minipage}%
-	\begin{minipage}[b]{0.2\linewidth}
-		\includegraphics[width=\linewidth]{pipeline/segments_crop}
-	\end{minipage}%
-	\begin{minipage}[b]{0.2\linewidth}
-		\includegraphics[width=\linewidth]{pipeline/original}
-	\end{minipage}%
-	\begin{minipage}[b]{0.2\linewidth}
-		\includegraphics[width=\linewidth]{pipeline/simplified}
-	\end{minipage}%
-	\begin{minipage}[b]{0.2\linewidth}
-		\includegraphics[width=\linewidth]{pipeline/mesh_crop}
+	\scriptsize
+	
+	\begin{minipage}{0.30\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{plane_detection}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.6\linewidth}
+		\textbf{Plane detection} using $k$-NN and region-growing \cite{feng_FastPlaneExtraction_2014, rabbani_SegmentationPointClouds_2006}.\\
+		\textbf{Intersection lines} from adjacent planar primitives.
+	\end{minipage}
+	
+	\vspace{0.25cm}
+	
+	\begin{minipage}{0.5\linewidth}
+		Construction of a 2D partition by \textbf{Kinetic framework} \cite{bauchet_KIPPIKIneticPolygonal_2018}\\
+		Many \textbf{collinear segments} in this representation.	
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.45\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{kinetic}
 	\end{minipage}
 
-	\begin{itemize}
-		\item Input: Point clouds, Photogrammetry or Structure-from-Motion (SfM)
-		\item Segment detection
-		\item Kinetic partition
-		\item Simplification
-		\item Lifted model (LOD2 representation for GIS)
-	\end{itemize}
-\end{frame}
+	\vspace{0.25cm}
 
-\begin{frame}{Segment detection}
-	\begin{center}
-		\includegraphics[width=0.5\textwidth]{plane_detection}
-	\end{center}
-	\textbf{Plane detection} using $k$-NN and region-growing \cite{feng_FastPlaneExtraction_2014, holz_FastRangeImage_2013, rabbani_SegmentationPointClouds_2006}.\\
-	\textbf{Intersection lines} from adjacent planar primitives.\\
-\end{frame}
-
-\begin{frame}{Kinetic cell arrangement}
-	
-	\textbf{Kinetic cell arrangement} \cite{bauchet_KIPPIKIneticPolygonal_2018}
-	\vspace{0.5cm}
-	
-	\includegraphics[width=\linewidth]{kinetic}
-
-	Many \textbf{collinear segments} in this representation.
-\end{frame}
-
-\begin{frame}{Lifted model}
-	\scriptsize
-	\textbf{MRF formulation}
-	\[
-		E(\mathcal{L}) = \sum_{\mathcal{C}_i \in \mathcal{C}} E_{\mathcal{C}_i}(\mathcal{L}(\mathcal{C}_i)) + \mu \sum_{e = C_i \cap C_j} V_e(\mathcal{L}(\mathcal{C}_i), \mathcal{L}(\mathcal{C}_j))
-	\]
-	
-	\begin{minipage}{0.6\linewidth}
-		\textbf{Fidelity to ``inlier data''}
-		\[
-			E_{\mathcal{C}_i}(\Pi_k) = \frac{ \mathcal{A}_{\mathcal{C}_i}}{\operatorname{Card}(\mathbf{P}\cap \mathcal{C}_i)} \sum_{p \in \mathbf{P} \cap \mathcal{C}_i} \min(\epsilon, | p_z - \Pi_k(p_x, p_y) |)
-		\]
-		
-		\textbf{Regularity to height jumps}
-		\[ V_{e}(\Pi_k, \Pi_l) = p_e \operatorname{length}(e) \operatorname{z_e}(\Pi_k, \Pi_l) \]
-	\end{minipage}%
-	\begin{minipage}{0.4\linewidth}
+	\begin{minipage}{0.3\linewidth}
 		\centering
 		\includegraphics[width=\linewidth]{lift_terms}
 	\end{minipage}
-	\vspace{0.5cm}
-	
-	Local minima by \textbf{graph-cut optimization} \cite{boykov_FastApproximateEnergy_2001}.
+	\hfill
+	\begin{minipage}{0.6\linewidth}
+		\textbf{MRF formulation} minimized by \textbf{graph-cut optimization} \cite{boykov_FastApproximateEnergy_2001}.
+	\end{minipage}
 \end{frame}
+
+%\begin{frame}{Lifted model}
+%	\scriptsize
+%	\textbf{MRF formulation}
+%	\[
+%		E(\mathcal{L}) = \sum_{\mathcal{C}_i \in \mathcal{C}} E_{\mathcal{C}_i}(\mathcal{L}(\mathcal{C}_i)) + \mu \sum_{e = C_i \cap C_j} V_e(\mathcal{L}(\mathcal{C}_i), \mathcal{L}(\mathcal{C}_j))
+%	\]
+%	
+%	\begin{minipage}{0.6\linewidth}
+%		\textbf{Fidelity to ``inlier data''}
+%		\[
+%			E_{\mathcal{C}_i}(\Pi_k) = \frac{ \mathcal{A}_{\mathcal{C}_i}}{\operatorname{Card}(\mathbf{P}\cap \mathcal{C}_i)} \sum_{p \in \mathbf{P} \cap \mathcal{C}_i} \min(\epsilon, | p_z - \Pi_k(p_x, p_y) |)
+%		\]
+%		
+%		\textbf{Regularity to height jumps}
+%		\[ V_{e}(\Pi_k, \Pi_l) = p_e \operatorname{length}(e) \operatorname{z_e}(\Pi_k, \Pi_l) \]
+%	\end{minipage}%
+%	\begin{minipage}{0.4\linewidth}
+%		\centering
+%		\includegraphics[width=\linewidth]{lift_terms}
+%	\end{minipage}
+%	\vspace{0.5cm}
+%	
+%	Local minima by \textbf{graph-cut optimization} \cite{boykov_FastApproximateEnergy_2001}.
+%\end{frame}
 
 \begin{frame}{The need for simplification}
 	\begin{figure}
-		\includegraphics[width=\linewidth]{teaser_v2}
+		\includegraphics[width=\linewidth]{g862}
 	\end{figure}
 	
 	\textbf{Complex} 2D partitions\\
 	\textbf{Lack regularity} (small segments, angles close to orthogonality)\\
 	Collinear segments \textbf{by design}\\
 		
-	\blfootnote{Dataset from 2015 LiDAR survey of Dublin \cite{laefer_2015AerialLaser_2017}.}
+%	\blfootnote{Dataset from 2015 LiDAR survey of Dublin \cite{laefer_2015AerialLaser_2017}.}
 \end{frame}
 
-\begin{frame}{Simplification of 2D partitions}
-	\scriptsize
-	\textbf{Related point set simplification problems}
-	\begin{itemize}
-		\item Geometric unit disk cover
-		\item Minimum dominating set on unit disk graph
-	\end{itemize}
-	\textbf{NP-hard} \cite{marathe_SimpleHeuristicsUnit_1995}.
-	
-	\textbf{Simplification/regularity methods for urban scenes}
-	\begin{itemize}
-		\item Regularity in input data \cite{zhou_5DDualContouring_2010, monszpart_RAPterRebuildingManmade_2015}
-		\item Discrete operations on the partitions \cite{li_ApproximatingShapesImages_2020}
-		\item Output mesh simplification \cite{garland_SurfaceSimplificationUsing_1997, salinas_StructureAwareMeshDecimation_2015}
-	\end{itemize}
+%\begin{frame}{Simplification of 2D partitions}
+%	\scriptsize
+%	\textbf{Related point set simplification problems}
+%	\begin{itemize}
+%		\item Geometric unit disk cover
+%		\item Minimum dominating set on unit disk graph
+%	\end{itemize}
+%	\textbf{NP-hard} \cite{marathe_SimpleHeuristicsUnit_1995}.
+%	
+%	\textbf{Simplification/regularity methods for urban scenes}
+%	\begin{itemize}
+%		\item Regularity in input data \cite{zhou_5DDualContouring_2010, monszpart_RAPterRebuildingManmade_2015}
+%		\item Discrete operations on the partitions \cite{li_ApproximatingShapesImages_2020}
+%		\item Output mesh simplification \cite{garland_SurfaceSimplificationUsing_1997, salinas_StructureAwareMeshDecimation_2015}
+%	\end{itemize}
+%
+%	\textbf{Proposition:} Continuous simplification scheme on 2D partitions.
+%\end{frame}
 
-	\textbf{Proposition:} Continuous simplification scheme on 2D partitions.
-\end{frame}
-
-\begin{frame}[t]{Point vs. line movement}
-	\scriptsize
+\begin{frame}[c]{Point vs. line movement}
+	\small
 	
 	\begin{minipage}{0.6\linewidth}
 		\textbf{Point representation}
-		\begin{itemize}
-			\item Explicit coordinates for each point.
-			\item Lines defined implicitly using two points.
-		\end{itemize}	
+%		\begin{itemize}
+%			\item Explicit coordinates for each point.
+%			\item Lines defined implicitly using two points.
+%		\end{itemize}	
 		\begin{itemize}
 			\item[\cmark] Multiple lines can share a same point.
 			\item[\xmark] A line cannot carry more than two points.
@@ -123,23 +175,23 @@
 		Preserving collinearities \\
 		\hspace{0.05cm} $\implies$ Optimization under constraints.
 		
+		\vspace{0.5cm}
+		
+		\visible<1->{
+			\textbf{Line representation}
+%			\begin{itemize}
+%				\item Explicit coordinates for each line.
+%				\item Points defined implicitly using two lines.
+%			\end{itemize}
+			\begin{itemize}
+				\item[\cmark] A line can carry more than two points.
+				\item[\xmark] Multiple lines cannot share a same point.
+			\end{itemize}
+		}
 	\end{minipage}%
 	\begin{minipage}{0.4\linewidth}
 		\includegraphics[width=\linewidth]{point_mouvement}
-	\end{minipage}
-
-	\vspace{0.5cm}
-	\pause
-	
-	\textbf{Line representation}
-	\begin{itemize}
-		\item Explicit coordinates for each line.
-		\item Points defined implicitly using two lines.
-	\end{itemize}
-	\begin{itemize}
-		\item[\cmark] A line can carry more than two points.
-		\item[\xmark] Multiple lines cannot share a same point.
-	\end{itemize}
+	\end{minipage}	
 \end{frame}
 
 \begin{frame}{Optimization on line coordinates}
@@ -176,17 +228,19 @@
 	\textbf{Fidelity term}
 
 	No distance between lines invariant under Euclidean isometries.
-	\begin{eqnarray*}
-		d(P, L + \delta L)^2 & = & (\delta a \cdot x + \delta b \cdot y + \delta c)^2 \\
-		& = &  {\delta L}^t
-		\begin{pmatrix}
-			x^2 & xy & x \\
-			yx & y^2 & y \\
-			x & y & 1
-		\end{pmatrix} 
-		\delta L
-	\end{eqnarray*}
+%	\begin{eqnarray*}
+%		d(P, L + \delta L)^2 & = & (\delta a \cdot x + \delta b \cdot y + \delta c)^2 \\
+%		& = &  {\delta L}^t
+%		\begin{pmatrix}
+%			x^2 & xy & x \\
+%			yx & y^2 & y \\
+%			x & y & 1
+%		\end{pmatrix} 
+%		\delta L
+%	\end{eqnarray*}
 	\pause
+	
+	\begin{minipage}{0.6\linewidth}
 	\[
 		M_i \defunder{=} \frac{1}{2} 
 		\begin{bmatrix}
@@ -200,6 +254,11 @@
 	\[
 		E_{fidelity}(\mathcal{L}) \defunder{=} \frac{1}{2} \sum_{i = 1}^{n} L_i^t M_i L_i
 	\]
+	\end{minipage}%
+	\hfill
+	\begin{minipage}{0.3\linewidth}
+		\includegraphics[width=\linewidth]{metric_definition}
+	\end{minipage}
 \end{frame}
 
 \begin{frame}[t]{Regularity terms}
@@ -283,7 +342,7 @@
 \begin{frame}{Combinatorial reductions}
 	\scriptsize
 
-	\textbf{Discrete simplification operations}: merging lines.
+	\textbf{Discrete simplification operations}
 		
 	Two possibilities for $|\det(L_i, L_j, L_k) | = 0$
 	\begin{enumerate}
@@ -294,15 +353,18 @@
 	Special care when using a threshold: $|\det(L_i, L_j, L_k) | < \eta$.
 	\pause
 	
+	\vspace{0.5cm}
+	
 	\begin{minipage}{0.7\linewidth}
-	Merging lines $L_i, L_j$ into $L_f$:
+	
+	\textbf{Merging quadratic forms}
 	\[ M_f = M_i + M_j \]
 	
 	Similar to QEM \cite{garland_SurfaceSimplificationUsing_1997}.
 	\end{minipage}%
 	\begin{minipage}{0.3\linewidth}
 		\centering
-		\includegraphics[height=0.6\linewidth]{metric_merge}
+		\includegraphics[height=0.8\linewidth]{metric_merge}
 	\end{minipage}
 \end{frame}
 
@@ -370,7 +432,7 @@
 		\put(45,16){\fontsize{5}{5}\selectfont{error: 0.097}}
 		\put(45,15){\fontsize{5}{5}\selectfont{complexity: 24}}
 		
-		\put(30,12.5){\fontsize{7}{7}\selectfont{SAMD}}
+		\put(30,12){\fontsize{7}{7}\selectfont{SAMD}}
 		\put(45,3){\fontsize{5}{5}\selectfont{error: 0.07}}
 		\put(45,2){\fontsize{5}{5}\selectfont{complexity: 25}}
 		
@@ -378,15 +440,15 @@
 		\put(69,16){\fontsize{5}{5}\selectfont{error: 0.044}}
 		\put(69,15){\fontsize{5}{5}\selectfont{complexity: 28}}
 		
-		\put(54,12.5){\fontsize{7}{7}\selectfont{VSA}}
+		\put(54,12){\fontsize{7}{7}\selectfont{VSA}}
 		\put(69,3){\fontsize{5}{5}\selectfont{error: 0.03}}
 		\put(69,2){\fontsize{5}{5}\selectfont{complexity: 717}}
 		
-		\put(76,25){\fontsize{7}{7}\selectfont{Ours (w/o simpl.)}}
+		\put(76,25.5){\fontsize{7}{7}\selectfont{Ours (w/o simpl.)}}
 		\put(93,16){\fontsize{5}{5}\selectfont{error: 0.07}}
 		\put(93,15){\fontsize{5}{5}\selectfont{complexity: 186}}
 		
-		\put(76,12.5){\fontsize{7}{7}\selectfont{Ours}}
+		\put(76,12){\fontsize{7}{7}\selectfont{Ours}}
 		\put(93,3){\fontsize{5}{5}\selectfont{error: 0.055}}
 		\put(93,2){\fontsize{5}{5}\selectfont{complexity: 24}}
 	\end{overpic}
