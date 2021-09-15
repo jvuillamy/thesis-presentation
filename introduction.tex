@@ -1,62 +1,129 @@
 \section{Introduction}
 
-\begin{frame}{3D representations of urban spaces}
+\begin{frame}{Representations of urban spaces}
 	\centering
-	\includegraphics[width=0.25\linewidth]{context/vector_map}
-	\includegraphics[width=0.25\linewidth]{context/lod_visu}
-	\includegraphics[width=0.25\linewidth]{context/lod_visu}
-\end{frame}
-
-\begin{frame}{Why do we need 3D models?}
-	\begin{itemize}
-		\item\uncover<1->{Visualization}
-		\item\uncover<2->{Simulation}
-		\item\uncover<3->{Change tracking}
-	\end{itemize}
-	
-	\begin{minipage}[t][0.2\textheight][r]{\linewidth}
+	\scriptsize
+	\begin{minipage}{0.5\linewidth}
 		\centering
-		\only<1>{
-			\begin{figure}
-				\centering
-				\begin{subfigure}[t]{0.45\linewidth}
-					\includegraphics[width=\linewidth]{context/dense_visu}
-					\subcaption*{Dense mesh representation \footnote[frame]{Google Maps}}
-				\end{subfigure}
-				\begin{subfigure}[t]{0.45\linewidth}
-					\includegraphics[width=\linewidth]{context/lod_visu}
-					\subcaption*{LOD1 visualization \footnote[frame]{Bien'ici}}
-				\end{subfigure}
-			\end{figure}
-		}
-		
-		\only<2>{
-			\begin{figure}
-				\begin{subfigure}[t]{0.45\linewidth}
-					\includegraphics[width=\linewidth]{context/simulation_wind}
-					\subcaption*{Wind simulation \footnote[frame]{SIMULIA, Dassault Systèmes}}
-				\end{subfigure}
-				\begin{subfigure}[t]{0.45\linewidth}
-					\includegraphics[width=\linewidth]{context/simulation_lineofsight}
-					\subcaption*{5G connectivity simulation \footnote[frame]{SIRADEL}}
-				\end{subfigure}
-			\end{figure}
-		}
-		
-		\only<3>{}
+		\includegraphics[width=0.9\linewidth]{context/maps}\\
+		2D maps
+	\end{minipage}%
+	\pause%
+	\begin{minipage}{0.5\linewidth}
+		\centering
+		\includegraphics[width=0.9\linewidth]{context/dense_visu}\\
+		3D visualization
+	\end{minipage}%
+	\pause
+	
+	\begin{minipage}{0.5\linewidth}
+		\centering
+		\includegraphics[width=0.9\linewidth]{context/lods}\\
+		Geographic Information Systems (GIS)
+	\end{minipage}%
+	\pause%
+	\begin{minipage}{0.5\linewidth}
+		\centering
+		\includegraphics[width=0.9\linewidth]{context/bim}\\
+		Building information model (BIM)
 	\end{minipage}
 \end{frame}
 
-\begin{frame}{Acquisitions}			
-	Existing GIS data (incorrect)
-	LiDAR technologies
-	Imagery (airborne or drone) -> Photogrammetry
+\begin{frame}[t]{Why do we need 3D models?}
+	\textbf{Visualization}
+	\vfill
+	\begin{figure}
+		\centering
+		\begin{subfigure}[t]{0.45\linewidth}
+			\includegraphics[width=\linewidth]{context/dense_visu}
+			\subcaption*{Dense mesh representation \footnote[frame]{Google Maps}}
+		\end{subfigure}
+		\hfill%
+		\begin{subfigure}[t]{0.45\linewidth}
+			\includegraphics[width=\linewidth]{context/lod_visu}
+			\subcaption*{LOD1 visualization \footnote[frame]{Bien'ici}}
+		\end{subfigure}
+	\end{figure}
+\end{frame}
+
+\begin{frame}[t]{Why do we need 3D models?}
+	\textbf{Simulation}
+	\vfill
+	\begin{figure}
+		\centering
+		\begin{subfigure}[t]{0.45\linewidth}
+			\includegraphics[width=\linewidth]{context/simulation_wind}
+			\subcaption*{Wind simulation \footnote[frame]{SIMULIA, Dassault Systèmes}}
+		\end{subfigure}
+		\hfill%
+		\begin{subfigure}[t]{0.45\linewidth}
+			\includegraphics[width=\linewidth]{context/simulation_lineofsight}
+			\subcaption*{5G connectivity \footnote[frame]{SIRADEL}}
+		\end{subfigure}
+	\end{figure}
+\end{frame}
+
+\begin{frame}[t]{Why do we need 3D models?}
+	\textbf{Change tracking}
+	\vfill
+	\begin{figure}
+		\centering
+		\begin{subfigure}[t]{0.45\linewidth}
+			\includegraphics[width=\linewidth]{context/lod_diff_v2}
+			\subcaption*{Permit verification \footnote[frame]{Taken from \cite{biljecki_EffectAcquisition_2018}}}
+		\end{subfigure}%
+		\hfill%
+		\begin{subfigure}[t]{0.45\linewidth}
+			\includegraphics[width=\linewidth]{context/building_inspection}
+			\subcaption*{Building inspection \footnote[frame]{\href{https://www.engineering.com/story/automating-facility-inspection-with-drones}{Engineering.com \ExternalLink}}}
+		\end{subfigure}
+	\end{figure}	
+\end{frame}
+
+\begin{frame}{Acquisitions}
+	\small
+	\centering
+	\begin{minipage}{0.5\linewidth}
+		\centering
+		\textbf{LiDAR technologies}
+	\end{minipage}%
+	\begin{minipage}{0.5\linewidth}
+		\centering
+		\textbf{Photogrammetry}
+	\end{minipage}
+
+	\begin{minipage}{0.5\linewidth}
+		\centering
+		\includegraphics[width=0.7\linewidth]{context/lidar_method}			
+	\end{minipage}%
+	\begin{minipage}{0.5\linewidth}
+		\centering
+		\includegraphics[width=0.7\linewidth]{context/photo_method}
+	\end{minipage}
+
+	\begin{minipage}{0.5\linewidth}
+		\centering
+		\includegraphics[width=0.8\linewidth]{context/lidar}	
+	\end{minipage}%
+	\begin{minipage}{0.5\linewidth}
+		\centering
+		\includegraphics[width=0.8\linewidth]{context/photogrammetry}	
+	\end{minipage}%
 	
+	\blfootnote{Images from \href{https://wingtra.com/drone-photogrammetry-vs-lidar}{Wingtra \ExternalLink}}
 \end{frame}
 
 \begin{frame}{Scope of interest}
-	Point clouds either LiDAR or photogrammetry. \\
-	Semi-automatic  \\
-	Large-scale parsimonious representation \\
-	Small-scale dense representation
+	\textbf{Inputs:} Point clouds (LiDAR or Photogrammetry) \\
+	\textbf{Semi-automatic} methods \\
+	\pause
+	
+	\vspace{0.5cm}
+	
+	\begin{tabular}{ll}
+		\textbf{Parsimonious representation} & \textbf{Dense representation} \\
+		LOD2 reconstruction & Triangular mesh \\
+		Buildings & Any urban object \\
+		Strong regularity priors & No priors \\
+	\end{tabular}
 \end{frame}

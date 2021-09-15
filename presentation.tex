@@ -1,18 +1,44 @@
-\documentclass{beamer}
-\usetheme[sectionpage=none, progressbar=frametitle,background=light]{metropolis}
+\documentclass[
+%	handout,
+%	aspectratio=169
+]{beamer}
+
+\usetheme[sectionpage=progressbar, progressbar=frametitle,background=light]{metropolis}
+
+\includeonly{
+	introduction,
+	2D-simplification,
+	lexicographic,
+	conclusion,
+	appendices
+}
+
+\usepackage[
+	autoplay,
+%	draft
+]{animate}
 
 \usepackage[english]{babel}
+\usepackage{pifont}
 
 \usepackage{graphics}
+\usepackage{overpic}
+\usepackage{tikz, tikz-cd}
+\usepackage{enumitem}
+
 \usepackage{appendixnumberbeamer}
 
 \usepackage{algorithm2e}
 \usepackage{amssymb,amsmath,amsthm, bm}
 \usepackage{subcaption}
-\usepackage{tikz, enumitem}
 \usepackage{tabularx}
+\usepackage[type={CC}, modifier={by-nc}, version={3.0}]{doclicense}
+
+
 
 \usetikzlibrary{positioning}
+\usetikzlibrary{matrix}
+\usetikzlibrary{calc}
 
 %General declarations
 \DeclareMathOperator{\Ima}{Im}
@@ -20,6 +46,7 @@
 \DeclareMathOperator{\low}{low}
 \DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\length}{length}
 
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Q}{\mathbb{Q}}
@@ -28,6 +55,7 @@
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Sphere}{\mathbb{S}}
 \newcommand{\BigO}{\mathcal{O}}
+\newcommand{\M}{\ensuremath{\mathcal{M}}\xspace}
 
 \newcommand{\defunder}[1]{\underset{\text{def.}}{#1} \:}
 \newcommand{\vspan}{\operatorname{span}}
@@ -82,8 +110,61 @@
 \newcommand{\Vspan}{\operatorname{span}}
 \newcommand{\Mlex}{M_{lex}}
 
+\newcommand\blfootnote[1]{%
+	\begingroup
+	\renewcommand\thefootnote{}\footnote{#1}%
+	\addtocounter{footnote}{-1}%
+	\endgroup
+}
+
+\newcommand{\ExternalLink}{%
+	\tikz[x=1.2ex, y=1.2ex, baseline=-0.05ex]{% 
+		\begin{scope}[x=1ex, y=1ex]
+			\clip (-0.1,-0.1) 
+			--++ (-0, 1.2) 
+			--++ (0.6, 0) 
+			--++ (0, -0.6) 
+			--++ (0.6, 0) 
+			--++ (0, -1);
+			\path[draw, 
+			line width = 0.5, 
+			rounded corners=0.5] 
+			(0,0) rectangle (1,1);
+		\end{scope}
+		\path[draw, line width = 0.5] (0.5, 0.5) 
+		-- (1, 1);
+		\path[draw, line width = 0.5] (0.6, 1) 
+		-- (1, 1) -- (1, 0.6);
+	}
+}
+
+\newcommand{\arrowbounded}[2]{\ensuremath{\overset{\xrightarrow[\hphantom{#1}]{\text{#2}}}{#1}\left\downarrow\vphantom{#1}\right.}}
+
+\SetKwFunction{MakeSet}{MakeSet}
+\SetKwFunction{FindSet}{FindSet}
+\SetKwFunction{LinkSet}{LinkSet}
+
+\SetKwFunction{MMakeSet}{MakeSet\textsuperscript{*}}
+\SetKwFunction{MFindSet}{FindSet\textsuperscript{*}}
+\SetKwFunction{MLinkSet}{LinkSet\textsuperscript{*}}
+
 \setbeamerfont{footnote}{size=\fontsize{5pt}{5pt}\selectfont}
 \setbeamerfont{footnote mark}{size=\fontsize{5pt}{5pt}\selectfont}
+
+\setbeamertemplate{bibliography item}{\normalfont\insertbiblabel}
+\setbeamerfont{bibliography item}{size=\tiny}
+\setbeamerfont{bibliography entry author}{size=\tiny}
+\setbeamerfont{bibliography entry title}{size=\tiny}
+\setbeamerfont{bibliography entry location}{size=\tiny}
+\setbeamerfont{bibliography entry note}{size=\tiny}
+
+\setbeamertemplate{frametitle continuation}{(\insertcontinuationcountroman)}
+
+\metroset{block=fill}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
 
 \title{Planimetric simplification and lexicographic optimal chains for 3D urban scene reconstruction}
 \author[Julien Vuillamy]{Julien Vuillamy}
@@ -96,18 +177,20 @@
 	\includegraphics[width=0.25\linewidth]{front/logo-inria}
 }
 
+\definecolor{pathgreen}{RGB}{148, 191, 58}
+\definecolor{pathorange}{RGB}{197, 90, 17}
+\definecolor{pathblue}{RGB}{0, 138, 125}
+
 \graphicspath{{images}}
 
-\setcounter{tocdepth}{1}
-	
 \begin{document}
 	\begin{frame}
 		\titlepage
 	\end{frame}
-		
-%	\section*{Outline}
+
 	\begin{frame}{Outline}
-% 	    \tableofcontents
+%		\setbeamertemplate{section in toc}[sections numbered]
+		\tableofcontents[hideallsubsections]
 	\end{frame}
 	
 	\include{introduction}
@@ -119,8 +202,14 @@
 	
 	\include{appendices}
 
-
-\bibliographystyle{alphaurl}
+\begin{frame}[allowframebreaks]{Bibliography}
+\bibliographystyle{apalike}
 \bibliography{bibliography}
+\end{frame}
+
+%\begin{frame}
+%\renewcommand\footnoterule{{\hrule height 0pt}}
+%\blfootnote{\doclicenseThis}
+%\end{frame}
 
 \end{document}
