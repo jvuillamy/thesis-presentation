@@ -2,6 +2,10 @@
 
 \section{Parsimonious representations from 2D partitions}
 
+%\begin{frame}{Approaches}
+%	
+%\begin{frame}
+	
 \begin{frame}{Reconstruction pipeline}
 	\begin{minipage}[b]{0.2\linewidth}
 	\includegraphics[width=\linewidth]{pipeline/pointcloud_crop}
@@ -84,17 +88,17 @@
 \end{frame}
 
 \begin{frame}{Simplification of 2D partitions}
-	\small
-	\textbf{Related simplification problems}
+	\scriptsize
+	\textbf{Related point set simplification problems}
 	\begin{itemize}
 		\item Geometric unit disk cover
 		\item Minimum dominating set on unit disk graph
 	\end{itemize}
-	NP-hard \cite{marathe_SimpleHeuristicsUnit_1995}.
+	\textbf{NP-hard} \cite{marathe_SimpleHeuristicsUnit_1995}.
 	
-	\textbf{Simplification methods for urban scenes}
+	\textbf{Simplification/regularity methods for urban scenes}
 	\begin{itemize}
-		\item Regularity in input data \cite{zhou_5DDualContouring_2010, monszpart_RAPterRebuildingManmade_2015, zhou_FastExtensibleBuilding_2008}
+		\item Regularity in input data \cite{zhou_5DDualContouring_2010, monszpart_RAPterRebuildingManmade_2015}
 		\item Discrete operations on the partitions \cite{li_ApproximatingShapesImages_2020}
 		\item Output mesh simplification \cite{garland_SurfaceSimplificationUsing_1997, salinas_StructureAwareMeshDecimation_2015}
 	\end{itemize}
@@ -103,23 +107,30 @@
 \end{frame}
 
 \begin{frame}[t]{Point vs. line movement}
-	\textbf{Point representation}
-	\begin{itemize}
-		\item Explicit coordinates for each point.
-		\item Lines defined implicitly using two points.
-	\end{itemize}	
-	\begin{itemize}
-		\item[\cmark] Multiple lines can share a same point.
-		\item[\xmark] A line cannot carry more than two points.
-	\end{itemize}
+	\scriptsize
 	
-	Preserving collinearities $\implies$ Optimization under constraints.
-	\begin{center}
-		\includegraphics[width=0.6\linewidth]{point_mouvement}
-	\end{center}
-\end{frame}
+	\begin{minipage}{0.6\linewidth}
+		\textbf{Point representation}
+		\begin{itemize}
+			\item Explicit coordinates for each point.
+			\item Lines defined implicitly using two points.
+		\end{itemize}	
+		\begin{itemize}
+			\item[\cmark] Multiple lines can share a same point.
+			\item[\xmark] A line cannot carry more than two points.
+		\end{itemize}
+		
+		Preserving collinearities \\
+		\hspace{0.05cm} $\implies$ Optimization under constraints.
+		
+	\end{minipage}%
+	\begin{minipage}{0.4\linewidth}
+		\includegraphics[width=\linewidth]{point_mouvement}
+	\end{minipage}
 
-\begin{frame}[t]{Point vs. line movement}
+	\vspace{0.5cm}
+	\pause
+	
 	\textbf{Line representation}
 	\begin{itemize}
 		\item Explicit coordinates for each line.
@@ -131,46 +142,28 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Homogeneous coordinates}
+\begin{frame}{Optimization on line coordinates}
+	\small
 	
-	\textbf{Line} Coordinates $(a, b, c)$ of an oriented line $a x + b y + c = 0$\\
-	\textbf{Point} Homogeneous coordinates $(x, y, w)$ for a 2D point $(\frac{x}{w}, \frac{y}{w})$.
-	\pause
+	\begin{minipage}{0.5\linewidth}
+		\textbf{Representation of lines}
+		\[ a x + b y + c = 0 \]
 	
-	\textbf{Projective duality}
-	\[ 
-		\begin{pmatrix} a & b & c \end{pmatrix} \begin{pmatrix} x \\ y \\ w \end{pmatrix} = 0
-		\quad\quad
-		L = P_1 \times P_2
-		\quad\quad
-		P = L_1 \times L_2
-	\]	
-	\pause
-
-	\begin{minipage}{0.4\linewidth}
-	\textbf{Euclidean normalization}
-	\begin{eqnarray*}
-		a^2 + b^2 &=& 1 \: \textrm{ for lines}\\
-		w &=& 1 \: \textrm{ for points}
-	\end{eqnarray*}	
+		\textbf{Euclidean normalization}
+		\[ a^2 + b^2 = 1 \]
 	\end{minipage}%
-	\begin{minipage}{0.6\linewidth}
-		\includegraphics[width=\linewidth]{euclidean_normalization}
+	\begin{minipage}{0.5\linewidth}
+		\includegraphics[width=\linewidth]{euclidean_normalization_line}
 	\end{minipage}
-	
-	\blfootnote{Image from \cite{forstner_PhotogrammetricComputerVision_2016}.}
-\end{frame}
-
-\begin{frame}{Energy formulation}
-	
-	$\mathcal{L}$: Euclidean-normalized lines of the partition.
 	
 	\vspace{1cm}
 	
 	\textbf{Trade-off between fidelity and regularity}
 	\[ 
-		E(\mathcal{L}) = E_{fidelity}(\mathcal{L}) + \lambda_1 \: E_{concurrent}(\mathcal{L}) + {\lambda_2} \: E_{orthogonality}(\mathcal{L})
+	E(\mathcal{L}) = E_{fidelity}(\mathcal{L}) + \lambda_1 \: E_{concurrent}(\mathcal{L}) + {\lambda_2} \: E_{orthogonality}(\mathcal{L})
 	\]
+	
+	\blfootnote{Image from \cite{forstner_PhotogrammetricComputerVision_2016}.}
 \end{frame}
 
 \begin{frame}[t]{Fidelity term}
@@ -179,10 +172,10 @@
 		&E(\mathcal{L}) = \alert{E_{fidelity}(\mathcal{L})} + \lambda_1 \: E_{concurrent}(\mathcal{L}) + 	{\lambda_2} \: E_{orthogonality}(\mathcal{L})&
 	\end{flalign*}
 	
-	\textbf{Fidelity term}
-	
 	\small
-	No metric defines a distance between lines invariant under Euclidean isometries.
+	\textbf{Fidelity term}
+
+	No distance between lines invariant under Euclidean isometries.
 	\begin{eqnarray*}
 		d(P, L + \delta L)^2 & = & (\delta a \cdot x + \delta b \cdot y + \delta c)^2 \\
 		& = &  {\delta L}^t
@@ -251,7 +244,7 @@
 	\end{minipage}%
 	
 	\begin{center}
-	\includegraphics[width=0.5\linewidth]{euclidean_normalization}
+	\includegraphics[width=0.5\linewidth]{euclidean_normalization_line}
 	\end{center}
 
 	\textbf{Tangent space} of $\mathcal{M}$ at $L_i$:
@@ -260,12 +253,13 @@
 		& with $U_i = \begin{pmatrix} b & 0 \\ a & 0 \\ 0 & 1 \end{pmatrix}$
 	\end{tabular}
 
-	$M_i$, restricted to this $2$-dimensional vector space $\mathcal{T}_{L_i} \mathcal{M}$, is \textbf{non-degenerate}: it defines a Riemannian metric for the line $L_i$ on $\mathcal{M}$.
+	$M_i$, restricted to this $2$-dimensional vector space $\mathcal{T}_{L_i} \mathcal{M}$, is \textbf{non-degenerate}.
+%	: it defines a Riemannian metric for the line $L_i$ on $\mathcal{M}$.
 \end{frame}
 
 \begin{frame}[c]{Riemannian gradient descent (II)}
-	\small
-		
+	\scriptsize
+
 	\textbf{Derivative} of the objective function
 	\[ D_i = \left( \frac{dE }{da},  \frac{dE }{db}, \frac{dE }{dc} \right) \]	
 	
@@ -287,38 +281,29 @@
 \end{frame}
 
 \begin{frame}{Combinatorial reductions}
-	\small
-	\textbf{Line representation}
-	\begin{itemize}
-		\item[\cmark] A line can carry more than two points.
-		\item[\xmark] Multiple lines cannot share a same point.
-	\end{itemize}
+	\scriptsize
+
+	\textbf{Discrete simplification operations}: merging lines.
+		
+	Two possibilities for $|\det(L_i, L_j, L_k) | = 0$
+	\begin{enumerate}
+		\item[a.] Two equal lines;
+		\item[b.] Lines meets at a same point.
+	\end{enumerate}
 	
-	Combinatorial reductions $\implies$ merging lines.
+	Special care when using a threshold: $|\det(L_i, L_j, L_k) | < \eta$.
 	\pause
 	
-	\begin{minipage}{0.7\linewidth}	
-		Two possibilities for $|\det(L_i, L_j, L_k) | = 0$
-		
-		\begin{enumerate}
-			\item[a.] Two equal lines;
-			\item[b.] Lines meets at a same point.
-		\end{enumerate}
+	\begin{minipage}{0.7\linewidth}
+	Merging lines $L_i, L_j$ into $L_f$:
+	\[ M_f = M_i + M_j \]
 	
-		What happens when $|\det(L_i, L_j, L_k) | < \eta$? 
+	Similar to QEM \cite{garland_SurfaceSimplificationUsing_1997}.
 	\end{minipage}%
 	\begin{minipage}{0.3\linewidth}
-%		\includegraphics[width=\linewidth]{example-image}
+		\centering
+		\includegraphics[height=0.6\linewidth]{metric_merge}
 	\end{minipage}
-	
-	\pause
-	\textbf{Invariant}: {\em Two lines cannot have more than one common point and two points cannot have more than one common line.}
-	
-	Merging lines $L_i, L_j$ into $L_f$:
-	
-	\begin{tabular}{cc}
-		$M_f = M_i + M_j$ & (similar to QEM \cite{garland_SurfaceSimplificationUsing_1997})
-	\end{tabular}
 \end{frame}
 
 \begin{frame}[c]{Optimization}
@@ -346,12 +331,6 @@
 		\end{overpic}
 	\end{center}
 \end{frame}
-
-\begin{frame}[c]{Results}
-	\includegraphics[width=0.5\linewidth]{bb_v2}%
-	\includegraphics[width=0.5\linewidth]{hoteldieu_v3}
-\end{frame}
-
 
 \begin{frame}{Comparison}
 	\centering
@@ -413,11 +392,16 @@
 	\end{overpic}
 \end{frame}
 
+\begin{frame}[c]{Results}
+	\includegraphics[width=0.5\linewidth]{bb_v2}%
+	\includegraphics[width=0.5\linewidth]{hoteldieu_v3}
+\end{frame}
+
 \begin{frame}{Limitations}
 	\small
 	\textbf{Representability} of the LOD2 model
 	\begin{center}
-		\includegraphics[width=0.8\linewidth]{failure_case}
+		\includegraphics[width=0.6\linewidth]{failure_case}
 	\end{center}
 
 	\textbf{Dissociation} between 2D and 3D regularity

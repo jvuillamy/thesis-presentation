@@ -27,9 +27,9 @@
 		\node[legend, anchor=south east] at (pointcloud.south east){
 			\fontsize{\legendsize}{9pt}\selectfont
 			\begin{itemize}[itemsep=0pt,partopsep=0pt,topsep=0pt]
-				\item[{\includegraphics[width=\legendsize]{intuition/inlier}}]{Inlier}
-				\item[{\includegraphics[width=\legendsize]{intuition/endpoint}}]{Endpoint}
-				\item[{\includegraphics[width=\legendsize]{intuition/outlier}}]{Outlier}
+				\item[{\includegraphics[width=\legendsize]{intuition/inlier}}] Inlier
+				\item[{\includegraphics[width=\legendsize]{intuition/endpoint}}] Endpoint
+				\item[{\includegraphics[width=\legendsize]{intuition/outlier}}] Outlier
 			\end{itemize}
 		};
 	\end{tikzpicture}
@@ -64,7 +64,7 @@
 \end{frame}
 
 % Total order on k-simplices
-\begin{frame}{A total order based on the Delaunay triangulation}
+\begin{frame}[c]{A total order based on the Delaunay triangulation}
 	\scriptsize
 	\begin{center}
 		\begin{minipage}{0.5\linewidth}
@@ -95,49 +95,47 @@
 \end{frame}
 
 % Crash course
-\begin{frame}[c]{Simplicial homology}
-	\begin{tabular}{cc}
-		Simplices & \raisebox{-.5\height}{\includegraphics[width=0.5\textwidth]{course/simplices}} \\
-		Simplicial complex & \raisebox{-.5\height}{\includegraphics[width=0.4\textwidth]{course/complex}}
-	\end{tabular}
-		
-	\vspace{1cm}
-	
-	A \textbf{\textit{k}-chain} $A$ with coefficients in $\F$ is a formal sum of $k$-simplices:
-	\begin{equation*}
-		A = \sum_{i} x_i \sigma_i, \text{ with } x_i \in \F \; \text{and} \;\sigma_i \in K^{(k)}
-	\end{equation*}
-\end{frame}
+%\begin{frame}[c]{Simplicial homology}
+%	\begin{tabular}{cc}
+%		Simplices & \raisebox{-.5\height}{\includegraphics[width=0.5\textwidth]{course/simplices}} \\
+%		Simplicial complex & \raisebox{-.5\height}{\includegraphics[width=0.4\textwidth]{course/complex}}
+%	\end{tabular}
+%		
+%	\vspace{1cm}
+%	
+%	A \textbf{\textit{k}-chain} $A$ with coefficients in $\F$ is a formal sum of $k$-simplices:
+%	\begin{equation*}
+%		A = \sum_{i} x_i \sigma_i, \text{ with } x_i \in \F \; \text{and} \;\sigma_i \in K^{(k)}
+%	\end{equation*}
+%\end{frame}
 
-\begin{frame}{Boundary operator}
-	The \textbf{boundary operator} $\partial_k : \Cchains_{k}(K) \to \Cchains_{k-1}(K)$ is the linear map defined for any $k$-simplex $\sigma = [a_0, \dots, a_k]$ as:
-	\[
-	\partial_k \sigma  \defunder{=}\sum_{i=0}^{k} (-1)^{i} [a_0,\dots, \widehat{a_i},\dots, a_k]
-	\]
-	
-	\begin{center}
-		\includegraphics[width=0.8\textwidth]{course/boundary}
-	\end{center}
-\end{frame}
+%\begin{frame}{Boundary operator}
+%	The \textbf{boundary operator} $\partial_k : \Cchains_{k}(K) \to \Cchains_{k-1}(K)$ is the linear map defined for any $k$-simplex $\sigma = [a_0, \dots, a_k]$ as:
+%	\[
+%	\partial_k \sigma  \defunder{=}\sum_{i=0}^{k} (-1)^{i} [a_0,\dots, \widehat{a_i},\dots, a_k]
+%	\]
+%	
+%	\begin{center}
+%		\includegraphics[width=0.8\textwidth]{course/boundary}
+%	\end{center}
+%\end{frame}
+%
+%\begin{frame}{Cycles \& Boundaries}
+%	The kernels and images of the boundary operator form respectively the vector space of \textbf{cycles} and \textbf{boundaries}:
+%	\begin{align*}
+%		\Zchains_{k}(K) &\defunder{=} \Ker \partial_k = \Big\{ \Gamma \in \Cchains_{k}(K), \partial_k \Gamma = 0 \Big\} \\
+%		\Bchains_k(K) &\defunder{=} \Ima \partial_{k+1} = \Big\{ \Gamma \in \Cchains_{k}(K), \exists A \in \Cchains_{k+1}(K) \mid \Gamma = \partial_{k+1} A \Big\}
+%	\end{align*}
+%
+%	\[
+%		\partial_{k} \partial_{k+1} = 0 \iff \Bchains_k(K) \subset \Zchains_k(K)
+%	\]
+%	
+%	\begin{center}
+%		\includegraphics[width=0.7\linewidth]{course/sequence}
+%	\end{center}
+%\end{frame}
 
-\begin{frame}{Cycles \& Boundaries}
-	The kernels and images of the boundary operator form respectively the vector space of \textbf{cycles} and \textbf{boundaries}:
-	\begin{align*}
-		\Zchains_{k}(K) &\defunder{=} \Ker \partial_k = \Big\{ \Gamma \in \Cchains_{k}(K), \partial_k \Gamma = 0 \Big\} 
-		%\label{definition:absolute-cycles}
-		\\
-		\Bchains_k(K) &\defunder{=} \Ima \partial_{k+1} = \Big\{ \Gamma \in \Cchains_{k}(K), \exists A \in \Cchains_{k+1}(K) \mid \Gamma = \partial_{k+1} A \Big\} 
-		%\label{definition:absolute-boundaries}
-	\end{align*}
-
-	\[
-		\partial_{k} \partial_{k+1} = 0 \iff \Bchains_k(K) \subset \Zchains_k(K)$
-	\]	
-	
-	\begin{center}
-		\includegraphics[width=0.5\linewidth]{course/sequence}
-	\end{center}
-\end{frame}
 %
 %\begin{frame}{Fundamental property}
 %	\begin{tabular}{lcl}
@@ -153,36 +151,43 @@
 %	\end{center}
 %\end{frame}
 
-\begin{frame}{Simplicial homology}
-\textbf{Homology groups} are defined as quotient spaces of cycles over boundaries:
-\[
-\Homol_k(K) \defunder{=} \frac{\Zchains_k(K)}{\Bchains_k(K)}
-\]
-
-$A, A' \in \Zchains_k(K)$ are \textbf{homologous cycles} \\
-\pause
-\vspace*{5pt}
-\hspace*{5pt} $\defunder{\iff}$ they belong to the same homology class in $\Homol_k(K)$ \\
-\pause
-\vspace*{5pt}
-\hspace*{5pt} $\iff A -  A' = \partial_{k+1}B$ for some ($k+1$)-chain $B$.
-
-\begin{center}
-\begin{tikzpicture}
-	\node[help lines](torus) {\includegraphics[width=0.5\linewidth]{course/homologous}};
-	\node[below left=-1cm and -1.75cm of torus]{$A$};
-	\node[below right=-1cm and -1.75cm of torus]{$A'$};
-	\node[below=-0.8cm of torus]{$B$};
-	\node[above=-0.8cm of torus]{$C$};
-\end{tikzpicture}
-\end{center}
-\end{frame}
+%\begin{frame}{Simplicial homology}
+%	\textbf{Homology groups} are defined as quotient spaces of cycles over boundaries:
+%	\[
+%	\Homol_k(K) \defunder{=} \frac{\Zchains_k(K)}{\Bchains_k(K)}
+%	\]
+%	
+%	$A, A' \in \Zchains_k(K)$ are \textbf{homologous cycles}
+%	
+%	\pause
+%	\vspace*{5pt}
+%	
+%	\hspace*{5pt} $\defunder{\iff}$ they belong to the same homology class in $\Homol_k(K)$ \\
+%	
+%	\pause
+%	\vspace*{5pt}
+%	
+%	\hspace*{5pt} $\iff A -  A' = \partial_{k+1}B$ for some ($k+1$)-chain $B$.
+%	
+%	\begin{center}
+%		\begin{tikzpicture}
+%			\node[help lines](torus) {\includegraphics[width=0.5\linewidth]{course/homologous}};
+%			\node[below left=-1cm and -1.75cm of torus]{$A$};
+%			\node[below right=-1cm and -1.75cm of torus]{$A'$};
+%			\node[below=-0.8cm of torus]{$B$};
+%			\node[above=-0.8cm of torus]{$C$};
+%		\end{tikzpicture}
+%	\end{center}
+%\end{frame}
 
 % Lexicographic order
 \begin{frame}{Lexicographic preorder on chains}
-	Total order on $k$-simplices, denoted $<$.\\
+	$K$: simplicial complex.
+	$\Cchains(K; \F)$ Vector space of chains.
 	
-	\textbf{Lexicographic total preorder} Given $\Gamma_1, \Gamma_2 \in \Cchains_k(K; \F)$,
+	Total order on $k$-simplices, denoted $<$.
+		
+	\textbf{Lexicographic preorder} Given $\Gamma_1, \Gamma_2 \in \Cchains_k(K; \F)$,
 		\[
 		\Gamma_1 \LexicographicOrderChain \Gamma_2 \defunder{\iff}
 		\begin{cases} 
@@ -207,6 +212,7 @@ $A, A' \in \Zchains_k(K)$ are \textbf{homologous cycles} \\
 \begin{frame}[t]{Homological formulation}
 \small
 \textbf{Optimal Homologous Chain Problem (OHCP)} \\
+
 Find the optimal chain $\Gamma_{\min}$ homologous to a given chain $\Gamma_0$:
 \begin{equation*}
 	\Gamma_{\min} = \min \Big\{ \Gamma \in \Cchains_k(K) \mid \exists A \in \Cchains_{k+1}(K), \Gamma - \Gamma_0 = \partial_{k+1} A \Big\}
@@ -215,6 +221,7 @@ Find the optimal chain $\Gamma_{\min}$ homologous to a given chain $\Gamma_0$:
 \vspace{0.5cm}
 
 \textbf{Imposed Boundary Problem} \\
+
 Given a $(k-1)$-boundary $\beta$, find the optimal chain $\Gamma_{\min}$ bounding $\beta$:
 \begin{equation*}
 	\Gamma_{\min} = \min \Big\{ \Gamma \in \Cchains_k(K) \mid \partial_k \Gamma = \beta \Big\}
@@ -228,59 +235,69 @@ Given a $(k-1)$-boundary $\beta$, find the optimal chain $\Gamma_{\min}$ boundin
 \end{frame}
 
 % Formulation: Imposed boundary
-\begin{frame}{Polynomial algorithms}
-	\small	
-	\[
-		\gamma \textrm{ is a \textbf{reduction} of }\alpha \defunder{\iff}
-		\begin{cases} 
-			\gamma \textrm{ homologous to } \alpha\\
-			\gamma \LexicographicOrderChain \alpha
-		\end{cases}
-	\]
+%\begin{frame}{Polynomial algorithms}
+%	\small
+%	
+%	\textbf{Boundary matrix}
+%	\[
+%		\partial_{k+1} = \arrowbounded{\begin{pmatrix}
+%				0 & 1 & 1 \\
+%				1 & 0 & 1 \\
+%				1 & 1 & 1 \\
+%				1 & 1 & 0 \\
+%		\end{pmatrix}
+%		}{Arbitrary order on (k+1)-simplices} \text{\tiny Total order on k-simplices}
+%	\]
+%	
+%	\vspace{0.2cm}
+%	
+%	\textbf{Matrix reduction algorithm} for persistent homology \cite{edelsbrunner_ComputationalTopologyIntroduction_2010}
+%	
+%	\textbf{Time complexity:} $\BigO(n^3)$ 
+%\end{frame}
 
-	\[
-		\partial_{d+1} = \arrowbounded{\begin{pmatrix}
-				0 & 1 & 1 \\
-				1 & 0 & 1 \\
-				1 & 1 & 1 \\
-				1 & 1 & 0 \\
-		\end{pmatrix}
-		}{Arbitrary order on (k+1)-simplices} \text{\tiny Total order on k-simplices}
-	\]
-\end{frame}
-
-\begin{frame}{Polynomial algorithms}
-	\small
-	\textbf{Matrix reduction algorithm} for persistent homology \cite{edelsbrunner_ComputationalTopologyIntroduction_2010} 
-	
-	\begin{block}{Observation}
-		There is a 1-to-1 correspondence between reducible simplices and non-zero columns of the reduced matrix.
-	\end{block}
-	
-	\begin{center}
-	$R = $\begin{tikzpicture}[baseline=-0.5ex]
-		\matrix (boundary)[matrix of math nodes, ampersand replacement=\&, left delimiter={(},right delimiter={)}]{
-			0 \& 1 \& 1 \\
-			1 \& 1 \& 1 \\
-			1 \& 0 \& 1 \\
-			1 \& 0 \& 0 \\
-		};
-		\draw[thick,pathorange]($(boundary-4-1.south west)+(0.05, 0.05)$) rectangle ($(boundary-4-1.north east)-(0.05, 0.05)$);
-		\draw[thick,pathblue]($(boundary-3-1.south west)+(0.05, 0.05)$) rectangle ($(boundary-1-1.north east)-(0.05, 0.05)$);
-		
-		\draw[thick,pathorange]($(boundary-2-2.south west)+(0.05, 0.05)$) rectangle ($(boundary-2-2.north east)-(0.05, 0.05)$);
-		\draw[thick,pathblue]($(boundary-1-2.south west)+(0.05, 0.05)$) rectangle ($(boundary-1-2.north east)-(0.05, 0.05)$);
-
-		\draw[thick,pathorange]($(boundary-3-3.south west)+(0.05, 0.05)$) rectangle ($(boundary-3-3.north east)-(0.05, 0.05)$);
-		\draw[thick,pathblue]($(boundary-2-3.south west)+(0.05, 0.05)$) rectangle ($(boundary-1-3.north east)-(0.05, 0.05)$);
-		
-		\node[below right=-0.8cm and 0.5cm of boundary]{\color{pathorange}Reducible simplex};
-		\node[above right=-0.8cm and 0.5cm of boundary]{\color{pathblue} Reductions};	
-	\end{tikzpicture}
-	\end{center}
-
-	\textbf{Time complexity:} $\BigO(n^3)$ 
-\end{frame}
+%\begin{frame}{Properties after matrix reduction}
+%	\small
+%	
+%	\[
+%		\alpha \text{ is reducible by } \beta \defunder{\iff} \begin{cases}
+%			\beta \text{ homologous to } \alpha \\
+%			\beta \LexicographicStrictOrderChain \alpha
+%		\end{cases}
+%	\]
+%	
+%	\begin{block}{\small Property 1}
+%		A chain is reducible iff one of its simplices is reducible.
+%	\end{block}
+%	
+%	
+%	\begin{block}{\small Property 2}
+%		There is a 1-to-1 correspondence between reducible simplices and non-zero columns of the reduced matrix.
+%	\end{block}
+%	
+%	\begin{center}
+%	$R = $\begin{tikzpicture}[baseline=-0.5ex]
+%		\matrix (boundary)[matrix of math nodes, ampersand replacement=\&, left delimiter={(},right delimiter={)}]{
+%			0 \& 1 \& 1 \\
+%			1 \& 1 \& 1 \\
+%			1 \& 0 \& 1 \\
+%			1 \& 0 \& 0 \\
+%		};
+%		\draw[thick,pathorange]($(boundary-4-1.south west)+(0.05, 0.05)$) rectangle ($(boundary-4-1.north east)-(0.05, 0.05)$);
+%		\draw[thick,pathblue]($(boundary-3-1.south west)+(0.05, 0.05)$) rectangle ($(boundary-1-1.north east)-(0.05, 0.05)$);
+%		
+%		\draw[thick,pathorange]($(boundary-2-2.south west)+(0.05, 0.05)$) rectangle ($(boundary-2-2.north east)-(0.05, 0.05)$);
+%		\draw[thick,pathblue]($(boundary-1-2.south west)+(0.05, 0.05)$) rectangle ($(boundary-1-2.north east)-(0.05, 0.05)$);
+%
+%		\draw[thick,pathorange]($(boundary-3-3.south west)+(0.05, 0.05)$) rectangle ($(boundary-3-3.north east)-(0.05, 0.05)$);
+%		\draw[thick,pathblue]($(boundary-2-3.south west)+(0.05, 0.05)$) rectangle ($(boundary-1-3.north east)-(0.05, 0.05)$);
+%		
+%		\node[below right=-0.8cm and 0.5cm of boundary]{\color{pathorange}Reducible simplex};
+%		\node[above right=-0.8cm and 0.5cm of boundary]{\color{pathblue} Reductions};	
+%	\end{tikzpicture}
+%	\end{center}
+%
+%\end{frame}
 
 % Efficient version
 \begin{frame}{Efficient versions in codimension 1}
@@ -308,7 +325,6 @@ Given a $(d-2)$-boundary $\gamma$ in $\M$, find the lexicographic optimal $(d-1)
 \end{minipage}
 \end{frame}
 
-% Efficient closed surface reconstruction
 \begin{frame}{Closed surface: dual formulation}
 \small
 \begin{center}
@@ -316,7 +332,7 @@ Given a $(d-2)$-boundary $\gamma$ in $\M$, find the lexicographic optimal $(d-1)
 \includegraphics<1->[width=\linewidth]{dual/primal_problem}
 & \includegraphics<2->[width=\linewidth]{dual/dual_graph}
 & \includegraphics<3->[width=\linewidth]{dual/dual_problem} \\
-\visible<1->{Duality} & \visible<2->{Primal problem} & \visible<3->{Dual problem}
+\visible<1->{Primal problem} & \visible<2->{Duality} & \visible<3->{Dual problem}
 \end{tabularx}
 \end{center}
 
@@ -346,6 +362,7 @@ Dual graph $G=(\GraphV, \GraphE)$, two vertices $\widetilde{\tau}_1,\widetilde{\
 	\pause
 	\textbf{Complexity: } $\BigO(\alpha(n))$ 
 \end{frame}
+
 % Codimension 1: Algorithm
 \begin{frame}[c]{Efficient closed surface reconstruction (codimension 1)}
 	\scriptsize
@@ -356,7 +373,7 @@ Dual graph $G=(\GraphV, \GraphE)$, two vertices $\widetilde{\tau}_1,\widetilde{\
 			\SetKw{Continue}{continue}
 			\SetKw{Or}{or}
 			\Input{$\widetilde{\tau_1}, \widetilde{\tau_2} \in \GraphV$}
-%			\Output{$\Gamma_{\operatorname{LMC}}$} 
+
 			\alert<+|handout:0>{$\Gamma_{\operatorname{LMC}} \leftarrow \varnothing$} \\
 			\alert<+|handout:0>{\For{$v \in \GraphV$} {
 					\MakeSet{$v$}
@@ -366,7 +383,7 @@ Dual graph $G=(\GraphV, \GraphE)$, two vertices $\widetilde{\tau}_1,\widetilde{\
 				\alert<+|handout:0>{$e = (v_1, v_2) \in \GraphV\times \GraphV$} \\
 				\alert<+|handout:0>{$r_1 \leftarrow $\FindSet{$v_1$} \\
 									$r_2 \leftarrow $\FindSet{$v_2$} \\
-			    } \\
+			    }
 				\eIf{\alert<+|handout:0>{$\{ r_1, r_2\} = \{ \widetilde{\tau_1}, \widetilde{\tau_2} \}$}}{
 					$\Gamma_{\operatorname{LMC}} \leftarrow \Gamma_{\operatorname{LMC}} \cup e$
 				}
@@ -378,9 +395,10 @@ Dual graph $G=(\GraphV, \GraphE)$, two vertices $\widetilde{\tau}_1,\widetilde{\
 	\end{minipage}%
 	\begin{minipage}[c]{0.5\linewidth}
 		\includegraphics[width=\linewidth]{dual/dual_problem}
-	\end{minipage}%
+	\end{minipage}
 
 	\textbf{Complexity:} Sorting dual edges ($\BigO(n \log n)$) + Algorithm ($\BigO(n \alpha(n))$).
+
 \end{frame}
 
 \begin{frame}{Results}
@@ -391,25 +409,25 @@ Dual graph $G=(\GraphV, \GraphE)$, two vertices $\widetilde{\tau}_1,\widetilde{\
 		\end{center}
 \end{frame}
 
-\begin{frame}{Relative chains}
-	\textbf{Relative homology} of a simplicial pair $(K, B)$  ``ignores'' all the part of $K$ inside of $B$.
-	\pause
-	\[
-	\Cchains_k(K, B) \defunder{=} \frac{\Cchains_k(K)}{\Cchains_k(B)} 
-	\]
-	\pause
-	%
-	\[
-	\begin{aligned}
-		\Gamma + \Cchains_k(B) \in \Zchains_{k}(K, B) &\iff | \partial_k\Gamma | \subset B\\
-		\Gamma + \Cchains_k(B) \in \Bchains_k(K, B) &\iff  \exists A \in \Cchains_{k+1}(K), |\Gamma - \partial_{k+1} A| \subset B
-	\end{aligned}
-	\]
-	
-	\begin{center}
-		\includegraphics[width=0.4\linewidth]{course/relative_homology}
-	\end{center}
-\end{frame}
+%\begin{frame}{Relative chains}
+%	\textbf{Relative homology} of a simplicial pair $(K, B)$  ``ignores'' all the part of $K$ inside of $B$.
+%	\pause
+%	\[
+%	\Cchains_k(K, B) \defunder{=} \frac{\Cchains_k(K)}{\Cchains_k(B)} 
+%	\]
+%	\pause
+%	%
+%	\[
+%	\begin{aligned}
+%		\Gamma + \Cchains_k(B) \in \Zchains_{k}(K, B) &\iff | \partial_k\Gamma | \subset B\\
+%		\Gamma + \Cchains_k(B) \in \Bchains_k(K, B) &\iff  \exists A \in \Cchains_{k+1}(K), |\Gamma - \partial_{k+1} A| \subset B
+%	\end{aligned}
+%	\]
+%	
+%	\begin{center}
+%		\includegraphics[width=0.4\linewidth]{course/relative_homology}
+%	\end{center}
+%\end{frame}
 
 \begin{frame}{Efficient open surface reconstruction (codimension 1)}
 	\begin{figure}
@@ -440,14 +458,15 @@ Dual graph $G=(\GraphV, \GraphE)$, two vertices $\widetilde{\tau}_1,\widetilde{\
 		\item<2->[2.] Compute the lexicographic optimal chain homologous to $\Gamma_0$
 	\end{itemize}
 	
-	\pause
-	\begin{alertblock}{Warning}
-		\centering
-		Optimal homologous to $\Gamma_0$ $\neq$ Optimal bounded by $\gamma$
-	\end{alertblock}
+%	\pause
+%	\begin{alertblock}{Warning}
+%		\centering
+%		Optimal homologous to $\Gamma_0$ $\neq$ Optimal bounded by $\gamma$
+%	\end{alertblock}
 \end{frame}
 
 \begin{frame}{Part 1: Solution in the Delaunay triangulation}
+	\small
 	\textbf{Idea:} Recursively replace the highest vertex on the boundary $\gamma$ by edges in its lower link.
 	\begin{figure}
 		\centering
@@ -459,51 +478,48 @@ Dual graph $G=(\GraphV, \GraphE)$, two vertices $\widetilde{\tau}_1,\widetilde{\
 	\textbf{Time complexity: } $\BigO(n \log n)$
 \end{frame}
 
-\begin{frame}{Duality and intersection product}
+
+%\begin{frame}{Duality and intersection product}
+%
+%	
+%	\textbf{Orthogonal complement}	
+%	\begin{equation}
+%		V^{\perp} \defunder{=} \Big\{ \Gamma \in\Cchains_{d-1}(K, B) \mid \forall \gamma \in V, \: \Gamma \otimes \gamma = 0 \Big\}
+%	\end{equation}
+%\end{frame}
+
+\begin{frame}{Part 2: Optimal homologous chain to $\Gamma_0$}
+	\scriptsize
+	
 	\textbf{Intersection product}
 	\begin{align*}
 		\begin{split}
-			\otimes : \Cchains_k(K) \times  \Cchains_{d-k}(\widetilde{K}) &\to \F\\
+			\otimes : \Cchains_2(K) \times  \Cchains_1(\widetilde{K}) &\to \F\\
 			(\Gamma, \gamma) &\mapsto \Gamma \otimes \gamma \defunder{=} \sum_{\sigma \in K^{(k)}} \Gamma(\sigma) \: \gamma (\widetilde{\sigma})
 		\end{split}
 	\end{align*}
 	
-	\textbf{Orthogonal complement}	
-	\begin{equation}
-		V^{\perp} \defunder{=} \Big\{ \Gamma \in\Cchains_{d-1}(K, B) \mid \forall \gamma \in V, \: \Gamma \otimes \gamma = 0 \Big\}
-	\end{equation}
-\end{frame}
-
-\begin{frame}{Part 2: Optimal homologous chain to $\Gamma_0$}
-	
-	\textbf{Lefschetz duality}	
-	\begin{eqnarray*}
-		\Zchains_{d-1}(K, B) = \Bchains_1(\widetilde{K \setminus B})^{\perp} \\
-		\Bchains_{d-1}(K, B) = \Zchains_1(\widetilde{K \setminus B})^{\perp} 
-	\end{eqnarray*}
-	
-	\vspace{0.2cm}	
 	\pause
-
+	\textbf{Lefschetz duality}		
 	\begin{center}
-		\begin{tikzpicture}
-			\small
-			\node (duality){\includegraphics[width=0.7\linewidth]{dual/intersection_product}};
-			\node[above left=-0.5cm and -1cm of duality]{$\gamma \in \Bchains_1(\widetilde{K \setminus B})$};
-			\node[above=-0.3cm of duality]{$\Gamma \in \Zchains_2(K, B)$};
-			\node[below right=-1cm and -1.5cm of duality]{$\gamma' \in \Zchains_1(\widetilde{K \setminus B})$};
-			\node[above right=-1cm and -1.5cm of duality]{$\Gamma' \in \Bchains_2(K, B)$};
-		\end{tikzpicture}
+		\scalebox{0.7}{
+			\begin{tikzpicture}
+				\small
+				\node (duality){\includegraphics[width=0.7\linewidth]{dual/intersection_product}};
+				\node[above left=-0.5cm and -1cm of duality]{$\beta \in \Bchains_1(\widetilde{K \setminus B})$};
+				\node[above=-0.3cm of duality]{$\Gamma \in \Zchains_2(K, B)$};
+				\node[below right=-1cm and -1.5cm of duality]{$\alpha \in \Zchains_1(\widetilde{K \setminus B})$};
+				\node[above right=-1cm and -1.5cm of duality]{$\Delta \in \Bchains_2(K, B)$};
+			\end{tikzpicture}
+		}
 	\end{center}
-\end{frame}
 
-\begin{frame}{Homologous chain problem}
 	\begin{eqnarray*}
-		\Gamma \textrm{ homologous to } \Gamma_0 &\iff& \Gamma - \Gamma_0 \in \Bchains_{d-1}(K, B) \\
-		\pause &\iff& \Gamma - \Gamma_0 \in \Zchains_1(\widetilde{K \setminus B})^{\perp} \\
-		\pause &\iff& \forall \gamma \in \Zchains_1(\widetilde{K \setminus B}), \; (\Gamma - \Gamma_0) \otimes \gamma = 0
+		\Gamma \textrm{ homologous to } \Gamma_0 &\iff& \Gamma - \Gamma_0 \in \Bchains_2(K, B) \\
+		&\iff& \forall \alpha \in \Zchains_1(\widetilde{K \setminus B}), \; (\Gamma - \Gamma_0) \otimes \alpha = 0
 	\end{eqnarray*}
 \end{frame}
+
 
 \begin{frame}{Augmented disjoint-sets structure (A.D.S.)}
 	Adds a value in $\F$ to each parent pointer.
@@ -527,7 +543,7 @@ Dual graph $G=(\GraphV, \GraphE)$, two vertices $\widetilde{\tau}_1,\widetilde{\
 \begin{frame}{Efficient intersection product computation}
 	\small
 	\[
-		\forall \gamma \in \Zchains_1(\widetilde{K \setminus B}), \; (\Gamma_{\min} - \Gamma_0) \otimes \gamma = 0
+		\forall \alpha \in \Zchains_1(\widetilde{K \setminus B}), \; (\Gamma_{\min} - \Gamma_0) \otimes \alpha = 0
 	\]
 	
 	\pause
@@ -547,39 +563,39 @@ Dual graph $G=(\GraphV, \GraphE)$, two vertices $\widetilde{\tau}_1,\widetilde{\
 	\pause $(r_1, g_1) \leftarrow$ \MFindSet{$6$}\\
 	\pause $(r_2, g_2) \leftarrow$ \MFindSet{$4$}\\
 	\pause \begin{eqnarray*} 
-				\Gamma_{\min}(e) &=& \Gamma_0 \otimes {\color{blue}\gamma}  \\
+				\Gamma_{\min}(e) &=& \Gamma_0 \otimes {\color{blue}\alpha}  \\
 								 &=& \Gamma_0(e) + g_2 - g_1
 			\end{eqnarray*}
 	\end{minipage}
 \end{frame}
-
-\begin{frame}{Optimal homologous relative chain}
-	\begin{minipage}{0.7\linewidth}
-	\begin{algorithm}[H]
-		\scriptsize
-		\SetKwInOut{Input}{Inputs}
-		\SetKwInOut{Output}{Output}
-		\SetKw{Continue}{continue}
-			
-		\Input{$\Gamma_0 \in\Cchains_{d-1}(K, B)$.}
-		\Output{$\Gamma_{\min} \in\Cchains_{d-1}(K, B)$, lexicographic optimal relative chain homologous to $\Gamma_0$.}
-		$\Gamma_{\min} \leftarrow 0$ \\
-		\For{$v \in \GraphV_{K \setminus B}$} {
-			\MMakeSet{$v$}
-		}
-		\For{$e \in \GraphE_{K \setminus B}$ in decreasing order}{
-			$e = (v_1, v_2) \in \GraphV_{K \setminus B} \times \GraphV_{K \setminus B}$ \\
-			$(r_1,  g_1) \leftarrow $ \MFindSet{$v_1$}\\
-			$(r_2,  g_2) \leftarrow $ \MFindSet{$v_2$}\\
-			$\alpha = {\Gamma_0}(\widetilde{e}) + g_2 - g_1$\\
-			\uIf{$r_1=r_2$}
-			{$\Gamma_{\min} \leftarrow \Gamma_{\min} + \alpha \cdot \widetilde{e}$}
-			\uElse
-			{\MLinkSet{$r_1$, $r_2$, $\alpha$}}
-		}
-	\end{algorithm}
-	\end{minipage}
-\end{frame}
+%
+%\begin{frame}{Optimal homologous relative chain}
+%	\begin{minipage}{0.7\linewidth}
+%		\begin{algorithm}[H]
+%			\scriptsize
+%			\SetKwInOut{Input}{Inputs}
+%			\SetKwInOut{Output}{Output}
+%			\SetKw{Continue}{continue}
+%				
+%			\Input{$\Gamma_0 \in\Cchains_{d-1}(K, B)$.}
+%			\Output{$\Gamma_{\min} \in\Cchains_{d-1}(K, B)$, lexicographic optimal relative chain homologous to $\Gamma_0$.}
+%			$\Gamma_{\min} \leftarrow 0$ \\
+%			\For{$v \in \GraphV_{K \setminus B}$} {
+%				\MMakeSet{$v$}
+%			}
+%			\For{$e \in \GraphE_{K \setminus B}$ in decreasing order}{
+%				$e = (v_1, v_2) \in \GraphV_{K \setminus B} \times \GraphV_{K \setminus B}$ \\
+%				$(r_1,  g_1) \leftarrow $ \MFindSet{$v_1$}\\
+%				$(r_2,  g_2) \leftarrow $ \MFindSet{$v_2$}\\
+%				$\alpha = {\Gamma_0}(\widetilde{e}) + g_2 - g_1$\\
+%				\uIf{$r_1=r_2$}
+%				{$\Gamma_{\min} \leftarrow \Gamma_{\min} + \alpha \cdot \widetilde{e}$}
+%				\uElse
+%				{\MLinkSet{$r_1$, $r_2$, $\alpha$}}
+%			}
+%		\end{algorithm}
+%	\end{minipage}
+%\end{frame}
 
 \begin{frame}{Applications}
 	\tiny
@@ -600,23 +616,14 @@ Dual graph $G=(\GraphV, \GraphE)$, two vertices $\widetilde{\tau}_1,\widetilde{\
 			\multicolumn{3}{ |c| }{Performance} \\ \hline
 			Delaunay triangulation & 2 633 ms & 14 416 ms \\
 			Representative chain & 27 ms & 5 ms \\
-			Optimal chain & 1 548 ms & 8 040 ms \\
-			\multicolumn{3}{ |c| }{Output} \\ \hline
-			Number of triangles & 1 953 211 & 9 108 074 \\ \hline
+			Optimal chain & 1 548 ms & 8 040 ms
 		\end{tabular}
 	\end{table}
 \end{frame}
 
-\begin{frame}{Spatial decomposition}
-	\textbf{Tiling strategy} for large point clouds
-	\begin{center}
-		\includegraphics[width=0.45\linewidth]{applications/dublin_parts}
-		\includegraphics[width=0.45\linewidth]{applications/terrain_multipart}
-	\end{center}
-\end{frame}
-
 \begin{frame}{Linearity \& homology generators}
 	\small
+	
 	\[
 		\Mlex : \Gamma \in \Cchains_k(K, B) \mapsto \min_{\LexicographicOrderChain} \: \Gamma + \Bchains_{k}(K, B)
 	\]
@@ -645,19 +652,14 @@ Dual graph $G=(\GraphV, \GraphE)$, two vertices $\widetilde{\tau}_1,\widetilde{\
 	\pause
 	\textbf{Critical basis}
 	\begin{equation*}
-		\CritBasis_{i+1} = \min_{\LexicographicOrderChain} \left\{  \Gamma \in  \ZchainMin_k(K) \: \mid \:   \Gamma \notin \Vspan(  \CritBasis_1, \ldots , \CritBasis_i )  \quad \textrm{and} \quad  \Gamma\big(\Crit(\Gamma)\big)= 1 \right\}
+		\CritBasis_{i+1} = \min_{\LexicographicOrderChain} \left\{  \Gamma \in  \ZchainMin_k(K) \: \mid \:   \Gamma \notin \Vspan(  \CritBasis_1, \ldots , \CritBasis_i ) \text{ and } \Gamma\big(\Crit(\Gamma)\big)= 1 \right\}
 	\end{equation*}
-	
+		
 	\pause
-	\[ 
-	i \leq j \implies b_i \LexicographicOrderChain b_j
-	\]
-	
-	\pause
-	\[
-	\CritBasis_j ( \Crit( \CritBasis_i ) ) =  \delta_{ij}
-	\]
-	where $\delta_{ij}$ is the Kronecker delta. 
+	\begin{center}
+		$\CritBasis_j ( \Crit( \CritBasis_i ) ) =  \delta_{ij}$ where $\delta_{ij}$ is the Kronecker delta. 
+	\end{center}
+
 \end{frame}
 
 \begin{frame}{Applications}
