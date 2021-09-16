@@ -63,63 +63,6 @@
 	$\mathcal{P}_2 = \{ e'_1, e'_2, \cdots, e'_p \}$ with $e'_1 > e'_2 > \cdots > e'_p$.
 \end{frame}
 
-% Total order on k-simplices
-\begin{frame}[c]{A total order based on the Delaunay triangulation (I)}
-	\scriptsize
-	\begin{block}{\scriptsize Total order on 2-simplices}
-		For $\sigma_1, \sigma_2 \in K^{(2)}$,
-		\[
-		\sigma_1 \leq \sigma_2 \defunder{\iff}
-		\begin{cases}
-			\rseb(\sigma_1) < \rseb(\sigma_2) &\\
-			\:  \operatorname{or} &\\
-			\rseb(\sigma_1) = \rseb(\sigma_2) & \operatorname{and} \circrad(\sigma_1) \geq \circrad(\sigma_2)
-		\end{cases}
-		\]
-	\end{block}
-	
-	\vspace{0.5cm}
-		
-	\begin{center}
-		\begin{minipage}{0.5\linewidth}
-			\centering
-			\includegraphics[height=0.3\textheight]{order_rseb}\\
-			\color{pathblue}$\rseb(\sigma_1) = \rseb(\sigma_2)$	
-		\end{minipage}%
-		\begin{minipage}{0.5\linewidth}
-			\centering
-			\includegraphics[height=0.3\textheight]{order_rcirc}\\
-			\color{pathorange} $\circrad(\sigma_1) \neq \circrad(\sigma_2)$
-		\end{minipage}%
-	\end{center}
-\end{frame}
-
-\begin{frame}{A total order based on the Delaunay triangulation (II)}
-\small
-\begin{minipage}{0.6\linewidth}
-\begin{block}{\small Proposition}
-The support of
-\[
-	\min_{\LexicographicOrderChain} \{ \Gamma \in \Cchains_2(K), \partial \Gamma = \beta_{\mathbf{P}} \}
-\]
-corresponds to the $2$-simplices of the Delaunay triangulation of $P$.
-\end{block}
-\end{minipage}%
-\begin{minipage}{0.4\linewidth}
-	\begin{tikzpicture}
-		\node (delaunay) { \includegraphics[width=0.9\linewidth]{delaunay_bp} };
-		\node[above right=-0.5cm and -0.5cm of delaunay]{$\beta_{\mathbf{P}}$};
-		\node at (0.2cm, 0) {$\mathbf{P}$};
-	\end{tikzpicture}
-\end{minipage}
-
-\vspace{0.5cm}
-
-\textbf{Generalization} of a total order for simplices in any dimension.
-
-\textbf{Characterization of regular triangulations} as lexicographic optimal chains.
-\end{frame}
-
 % Crash course
 %\begin{frame}[c]{Simplicial homology}
 %	\begin{tabular}{cc}
@@ -209,80 +152,141 @@ corresponds to the $2$-simplices of the Delaunay triangulation of $P$.
 % Lexicographic order
 \begin{frame}{Lexicographic preorder on chains}
 	$K$: simplicial complex.\\
-	$\Cchains_k(K; \F)$ Vector space of $k$-chains.
+	$\F$: field ($\Z_2$ or $\Q$)\\
+	$\Cchains_k(K; \F)$: Vector space of $k$-chains.
 	
 	\textbf{Total order} on $k$-simplices, denoted $<$.
-		
+	
 	\textbf{Lexicographic preorder} Given $\Gamma_1, \Gamma_2 \in \Cchains_k(K; \F)$,
+	\[
+	\Gamma_1 \LexicographicOrderChain \Gamma_2 \defunder{\iff}
+	\begin{cases} 
+		|\Gamma_1| = |\Gamma_2| \\
+		\operatorname{or} \\
+		\max \big\{ \sigma \in |\Gamma_1| \triangle |\Gamma_2|  \big\}  \in |\Gamma_2|
+	\end{cases}
+	\]
+	where $\triangle$ denotes the set symmetric difference.
+	
+	%	\[
+	%		\big( \Gamma_1 \LexicographicOrderChain \Gamma_2 \quad \textrm{and} \quad  	\Gamma_2 
+	%		\LexicographicOrderChain  \Gamma_1 \big) \iff |\Gamma_1| = |\Gamma_2| 
+	%	\]
+	%	
+	%	\begin{alertblock}{$\F = \Z_2$}
+	%		$\LexicographicOrderChain$ is a total order.
+	%	\end{alertblock}
+\end{frame}
+
+% Total order on k-simplices
+\begin{frame}[c]{A total order based on the Delaunay triangulation (I)}
+	\scriptsize
+	\begin{block}{\scriptsize Total order on 2-simplices}
+		For $\sigma_1, \sigma_2 \in K^{(2)}$,
 		\[
-		\Gamma_1 \LexicographicOrderChain \Gamma_2 \defunder{\iff}
-		\begin{cases} 
-			|\Gamma_1| = |\Gamma_2| \\
-			\operatorname{or} \\
-			\max \big\{ \sigma \in |\Gamma_1| \triangle |\Gamma_2|  \big\}  \in |\Gamma_2|
+		\sigma_1 \leq \sigma_2 \defunder{\iff}
+		\begin{cases}
+			\rseb(\sigma_1) < \rseb(\sigma_2) &\\
+			\:  \operatorname{or} &\\
+			\rseb(\sigma_1) = \rseb(\sigma_2) & \operatorname{and} \circrad(\sigma_1) \geq \circrad(\sigma_2)
 		\end{cases}
 		\]
-		where $\triangle$ denotes the set symmetric difference.
+	\end{block}
+	
+	\begin{center}
+		\begin{minipage}{0.5\linewidth}
+			\centering
+			\includegraphics[height=0.3\textheight]{order_rseb}\\
+			\color{pathblue}$\rseb(\sigma_1) = \rseb(\sigma_2)$	
+		\end{minipage}%
+		\begin{minipage}{0.5\linewidth}
+			\centering
+			\includegraphics[height=0.3\textheight]{order_rcirc}\\
+			\color{pathorange} $\circrad(\sigma_1) \neq \circrad(\sigma_2)$
+		\end{minipage}%
+	\end{center}
+\end{frame}
 
-%	\[
-%		\big( \Gamma_1 \LexicographicOrderChain \Gamma_2 \quad \textrm{and} \quad  	\Gamma_2 
-%		\LexicographicOrderChain  \Gamma_1 \big) \iff |\Gamma_1| = |\Gamma_2| 
-%	\]
-%	
-%	\begin{alertblock}{$\F = \Z_2$}
-%		$\LexicographicOrderChain$ is a total order.
-%	\end{alertblock}
+\begin{frame}{A total order based on the Delaunay triangulation (II)}
+	\small
+	\begin{minipage}{0.6\linewidth}
+		\begin{block}{\small Proposition}
+			The support of
+			\[
+			\min_{\LexicographicOrderChain} \{ \Gamma \in \Cchains_2(K), \partial \Gamma = \beta_{\mathbf{P}} \}
+			\]
+			corresponds to the $2$-simplices of the Delaunay triangulation of $P$.
+		\end{block}
+	\end{minipage}%
+	\begin{minipage}{0.4\linewidth}
+		\begin{tikzpicture}
+			\node (delaunay) { \includegraphics[width=0.9\linewidth]{delaunay_bp} };
+			\node[above right=-0.5cm and -0.5cm of delaunay]{$\beta_{\mathbf{P}}$};
+			\node at (0.2cm, 0) {$\mathbf{P}$};
+		\end{tikzpicture}
+	\end{minipage}
+	
+	\vspace{0.5cm}
+	
+	\textbf{Generalization} of a total order for simplices in any dimension.
+	
+	\textbf{Characterization of regular triangulations} as lexicographic optimal chains.
 \end{frame}
 
 % Formulation
-\begin{frame}[t]{Homological formulation}
-\small
+\begin{frame}{Homological formulation}
+\scriptsize
 
-\begin{minipage}{0.5\linewidth}
-\textbf{Optimal homologous chain} to a given chain $\Gamma_0$
+\begin{minipage}[c]{0.55\linewidth}
+\textbf{Optimal homologous chain} to a given chain $\alpha$
 \begin{equation*}
-	\Gamma_{\min} = \min \Big\{ \Gamma_0 + \partial_{k+1} A, A \in \Cchains_{d+1}(K) \Big\}
+	\alpha_{\min} = \min \Big\{ \alpha + \partial_{k+1} B, \: A \in \Cchains_{d+1}(K) \Big\}
 \end{equation*}
 
 \textbf{Optimal chain under imposed boundary} $\beta$
 \begin{equation*}
 	\Gamma_{\min} = \min \Big\{ \Gamma \in \Cchains_k(K) \mid \partial_k \Gamma = \beta \Big\}
 \end{equation*}
-
 \end{minipage}%
-\begin{minipage}{0.5\linewidth}
-	
-	
+\hfill%
+\begin{minipage}[c]{0.40\linewidth}
+	\begin{tikzpicture}
+		\node(image){\includegraphics[width=\linewidth]{problems}};
+		\node[homred, above=-0.2cm of image]{$\alpha$};
+		\node[homgreen, above left=-1.7cm and -2.5cm of image]{$\alpha_{\min}$};
+		\node[above left=-2.5cm and 0cm of image]{$\beta$};
+		\node[homyellow, below left=-1.2cm and -1.5cm of image]{$\Gamma_{\min}$};
+	\end{tikzpicture}
 \end{minipage}
 
 \pause
-\vspace{0.5cm}
-\textbf{NP-hard} for L1 minimization \cite{dey_ComputingMinimalPersistent_2020} \\
+\vspace{1cm}
+\textbf{NP-hard} for L1 minimization \cite{chen_HardnessResultsHomology_2011} \\
 \pause
 \textbf{Polynomial algorithms} for lexicographic optimality.
 \end{frame}
 
 % Formulation: Imposed boundary
-%\begin{frame}{Polynomial algorithms}
-%	\small
-%	
-%	\textbf{Boundary matrix}
-%	\[
-%		\partial_{k+1} = \arrowbounded{\begin{pmatrix}
-%				0 & 1 & 1 \\
-%				1 & 0 & 1 \\
-%				1 & 1 & 1 \\
-%				1 & 1 & 0 \\
-%		\end{pmatrix}
-%		}{Arbitrary order on (k+1)-simplices} \text{\tiny Total order on k-simplices}
-%	\]
-%	
-%	\vspace{0.2cm}
-%	
-%	\textbf{Matrix reduction algorithm} for persistent homology \cite{edelsbrunner_ComputationalTopologyIntroduction_2010}
-%	
-%	\textbf{Time complexity:} $\BigO(n^3)$ 
-%\end{frame}
+\begin{frame}{Polynomial algorithms}
+	\small
+	
+	\textbf{Boundary matrix}
+	\[
+		\partial_{k+1} = \arrowbounded{\begin{pmatrix}
+				0 & 1 & 1 \\
+				1 & 0 & 1 \\
+				1 & 1 & 1 \\
+				1 & 1 & 0 \\
+		\end{pmatrix}
+		}{Arbitrary order on (k+1)-simplices} \text{\tiny Total order on k-simplices}
+	\]
+	
+	\vspace{0.2cm}
+	
+	\textbf{Matrix reduction algorithm} for persistent homology \cite{edelsbrunner_ComputationalTopologyIntroduction_2010}
+	
+	\textbf{Time complexity:} $\BigO(n^3)$ 
+\end{frame}
 
 %\begin{frame}{Properties after matrix reduction}
 %	\small
@@ -331,7 +335,7 @@ corresponds to the $2$-simplices of the Delaunay triangulation of $P$.
 \begin{frame}{Efficient versions in codimension 1}
 \scriptsize
 
-\textbf{Simplicial complex}: \M $d$-pseudomanifold.\\
+\textbf{Simplicial complex}: $d$-pseudomanifold $\M$.\\
 \textbf{Codimension 1}: Looking for $(d-1)$-chains.
 \vspace{0.2cm}
 
@@ -353,13 +357,14 @@ Given a $(d-2)$-boundary $\gamma$ in $\M$, find the lexicographic optimal $(d-1)
 \end{minipage}
 \end{frame}
 
+
 \begin{frame}{Closed surface: dual formulation}
 \small
 \begin{center}
 \begin{tabularx}{\linewidth}{@{}YYY@{}}
-\includegraphics<1->[width=\linewidth]{dual/primal_problem}
-& \includegraphics<2->[width=\linewidth]{dual/dual_graph}
-& \includegraphics<3->[width=\linewidth]{dual/dual_problem} \\
+\visible<1->{\includegraphics[width=\linewidth]{dual/primal_problem}}
+& \visible<2->{\includegraphics[width=\linewidth]{dual/dual_graph}}
+& \visible<3->{\includegraphics[width=\linewidth]{dual/dual_problem}} \\
 \visible<1->{Primal problem} & \visible<2->{Duality} & \visible<3->{Dual problem}
 \end{tabularx}
 \end{center}
@@ -401,18 +406,17 @@ Dual graph $G=(\GraphV, \GraphE)$, two vertices $\widetilde{\tau}_1,\widetilde{\
 			\SetKw{Continue}{continue}
 			\SetKw{Or}{or}
 			\Input{$\widetilde{\tau_1}, \widetilde{\tau_2} \in \GraphV$}
-
-			\alert<+|handout:0>{$\Gamma_{\operatorname{LMC}} \leftarrow \varnothing$} \\
-			\alert<+|handout:0>{\For{$v \in \GraphV$} {
+			
+			\alert<0>{$\Gamma_{\operatorname{LMC}} \leftarrow \varnothing$ \\
+				\For{$v \in \GraphV$} {
 					\MakeSet{$v$}
 			}}
 			
 			\For{$e \in \GraphE$ in decreasing order}{
-				\alert<+|handout:0>{$e = (v_1, v_2) \in \GraphV\times \GraphV$} \\
-				\alert<+|handout:0>{$r_1 \leftarrow $\FindSet{$v_1$} \\
-									$r_2 \leftarrow $\FindSet{$v_2$} \\
-			    }
-				\eIf{\alert<+|handout:0>{$\{ r_1, r_2\} = \{ \widetilde{\tau_1}, \widetilde{\tau_2} \}$}}{
+				$e = (v_1, v_2) \in \GraphV\times \GraphV$ \\
+				$r_1 \leftarrow $\FindSet{$v_1$} \\
+				$r_2 \leftarrow $\FindSet{$v_2$} \\
+				\eIf{$\{ r_1, r_2\} = \{ \widetilde{\tau_1}, \widetilde{\tau_2} \}$}{
 					$\Gamma_{\operatorname{LMC}} \leftarrow \Gamma_{\operatorname{LMC}} \cup e$
 				}
 				{
@@ -422,11 +426,82 @@ Dual graph $G=(\GraphV, \GraphE)$, two vertices $\widetilde{\tau}_1,\widetilde{\
 		\end{algorithm}
 	\end{minipage}%
 	\begin{minipage}[c]{0.5\linewidth}
-		\includegraphics[width=\linewidth]{dual/dual_problem}
+		\includegraphics[width=\linewidth]{dual/algo_init}
+	\end{minipage}
+	
+	\textbf{Complexity:} Sorting dual edges ($\BigO(n \log n)$) + Algorithm ($\BigO(n \alpha(n))$).
+\end{frame}
+
+\begin{frame}[c]{Efficient closed surface reconstruction (codimension 1)}
+	\scriptsize
+	\begin{minipage}[c]{0.5\linewidth}
+		\begin{algorithm}[H]
+			\SetKwInOut{Input}{Inputs}
+			\SetKwInOut{Output}{Output}
+			\SetKw{Continue}{continue}
+			\SetKw{Or}{or}
+			\Input{$\widetilde{\tau_1}, \widetilde{\tau_2} \in \GraphV$}
+
+			$\Gamma_{\operatorname{LMC}} \leftarrow \varnothing$ \\
+			\For{$v \in \GraphV$} {
+					\MakeSet{$v$}
+			}
+			
+			\For{$e \in \GraphE$ in decreasing order}{
+				\alert<0|handout:0>{$e = (v_1, v_2) \in \GraphV\times \GraphV$} \\
+				\alert<1|handout:0>{$r_1 \leftarrow $\FindSet{$v_1$} \\
+									$r_2 \leftarrow $\FindSet{$v_2$} \\
+			    }
+				\eIf{\alert<2|handout:0>{$\{ r_1, r_2\} = \{ \widetilde{\tau_1}, \widetilde{\tau_2} \}$}}{
+					$\Gamma_{\operatorname{LMC}} \leftarrow \Gamma_{\operatorname{LMC}} \cup e$
+				}
+				{
+					\alert<3|handout:0>{\LinkSet{$r_1$, $r_2$}}
+				}
+			}
+		\end{algorithm}
+	\end{minipage}%
+	\begin{minipage}[c]{0.5\linewidth}
+		\includegraphics[width=\linewidth]{dual/algo_step1}
 	\end{minipage}
 
 	\textbf{Complexity:} Sorting dual edges ($\BigO(n \log n)$) + Algorithm ($\BigO(n \alpha(n))$).
+\end{frame}
 
+\begin{frame}[c]{Efficient closed surface reconstruction (codimension 1)}
+	\scriptsize
+	\begin{minipage}[c]{0.5\linewidth}
+		\begin{algorithm}[H]
+			\SetKwInOut{Input}{Inputs}
+			\SetKwInOut{Output}{Output}
+			\SetKw{Continue}{continue}
+			\SetKw{Or}{or}
+			\Input{$\widetilde{\tau_1}, \widetilde{\tau_2} \in \GraphV$}
+			
+			$\Gamma_{\operatorname{LMC}} \leftarrow \varnothing$ \\
+				\For{$v \in \GraphV$} {
+					\MakeSet{$v$}
+			}
+			
+			\For{$e \in \GraphE$ in decreasing order}{
+				$e = (v_1, v_2) \in \GraphV\times \GraphV$ \\
+				\alert<1|handout:0>{$r_1 \leftarrow $\FindSet{$v_1$} \\
+					$r_2 \leftarrow $\FindSet{$v_2$} \\
+				}
+				\eIf{\alert<2|handout:0>{$\{ r_1, r_2\} = \{ \widetilde{\tau_1}, \widetilde{\tau_2} \}$}}{
+					\alert<3|handout:0>{$\Gamma_{\operatorname{LMC}} \leftarrow \Gamma_{\operatorname{LMC}} \cup e$}
+				}
+				{
+					\LinkSet{$r_1$, $r_2$}
+				}
+			}
+		\end{algorithm}
+	\end{minipage}%
+	\begin{minipage}[c]{0.5\linewidth}
+		\includegraphics[width=\linewidth]{dual/algo_step2}
+	\end{minipage}
+	
+	\textbf{Complexity:} Sorting dual edges ($\BigO(n \log n)$) + Algorithm ($\BigO(n \alpha(n))$).
 \end{frame}
 
 \begin{frame}{Results}
@@ -466,13 +541,13 @@ Dual graph $G=(\GraphV, \GraphE)$, two vertices $\widetilde{\tau}_1,\widetilde{\
 			\node(inputs){\includegraphics[width=0.32\textwidth]{applications/mobius-points}};
 			\node[below=0cm of inputs]{Inputs};
 		\end{tikzpicture}%
-		\visible<1->{%
+		\visible<2->{%
 		\begin{tikzpicture}
 			\centering
 			\node(rep){\includegraphics[width=0.32\textwidth]{applications/mobius-representative}};
 			\node[below=0cm of rep]{Representative chain};
 		\end{tikzpicture}}%
-		\visible<2->{%
+		\visible<3->{%
 		\begin{tikzpicture}
 			\centering
 			\node(result){\includegraphics[width=0.32\textwidth]{applications/mobius-optimal}};
@@ -482,15 +557,9 @@ Dual graph $G=(\GraphV, \GraphE)$, two vertices $\widetilde{\tau}_1,\widetilde{\
 
 	\textbf{Two parts algorithm}
 	\begin{itemize}
-		\item<1->[1.] Compute a representative chain: any $2$-chain $\Gamma_0$ such that $\partial\Gamma_0$ is the imposed boundary $\gamma$.
-		\item<2->[2.] Compute the lexicographic optimal chain homologous to $\Gamma_0$
+		\item<2->[1.] Compute a representative chain: any $2$-chain $\Gamma_0$ such that $\partial\Gamma_0$ is the imposed boundary $\gamma$.
+		\item<3->[2.] Compute the lexicographic optimal chain homologous to $\Gamma_0$
 	\end{itemize}
-	
-%	\pause
-%	\begin{alertblock}{Warning}
-%		\centering
-%		Optimal homologous to $\Gamma_0$ $\neq$ Optimal bounded by $\gamma$
-%	\end{alertblock}
 \end{frame}
 
 \begin{frame}{Part 1: Solution in the Delaunay triangulation}
@@ -565,7 +634,6 @@ Dual graph $G=(\GraphV, \GraphE)$, two vertices $\widetilde{\tau}_1,\widetilde{\
 			\subcaption*{\MLinkSet{$5, 7, -1$}}
 		\end{subfigure}%
 	\end{figure}
-	\textbf{Complexity:} $\BigO(c \alpha(n))$
 \end{frame}
 
 \begin{frame}{Efficient intersection product computation}
